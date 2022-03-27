@@ -1,0 +1,11 @@
+.sidebar {
+    grid-area: nav;
+    background: #8fc2c7;
+    padding: 2rem;
+}
+.item {
+    color: azure;
+}
+.active {
+    color: gold;
+}

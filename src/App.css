@@ -1,0 +1,15 @@
+.app-wraper {
+    margin: 1rem 5rem;
+    display: grid;
+    /*width: 1583px;*/
+    grid-template-areas:
+"header header header"
+"nav content content";
+    grid-template-rows: 120px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
+}
+.app-wraper-content{
+    grid-area: content;
+    background: #8fc2c7;
+}

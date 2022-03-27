@@ -1,0 +1,57 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    margin: 1rem;
+}
+
+.dialog-items {;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: .3rem;
+}
+
+.dialogBox {
+    padding: .5rem;
+}
+
+.dialogBox:hover {
+    background: #47a0b2;
+}
+
+.dialogLink {
+    display: flex;
+    align-items: center;
+}
+
+.dialog.active {
+    color: gold;
+}
+
+.messages {
+
+
+}
+
+.message {
+
+}
+
+.message:nth-child(even) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.message:nth-child(odd) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.message div {
+    padding: .5rem;
+    border-radius: 10px;
+    background: #c4dee5;
+}
