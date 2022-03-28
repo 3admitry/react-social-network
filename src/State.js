@@ -1,5 +1,5 @@
 let rerenderEntireTree = () => {
-
+    console.log('rerenderEntireTree');
 }
 
 export let state = {
