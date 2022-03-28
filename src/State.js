@@ -1,5 +1,6 @@
 let rerenderEntireTree = () => {
     console.log('rerenderEntireTree');
+    console.log('test message');
 }
 
 export let state = {
