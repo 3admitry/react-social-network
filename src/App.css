@@ -1,4 +1,4 @@
-.app-wraper {
+.app-wrapper {
     margin: 1rem 5rem;
     display: grid;
     /*width: 1583px;*/
@@ -9,7 +9,7 @@
     grid-template-columns: 2fr 10fr;
     grid-gap: 10px;
 }
-.app-wraper-content{
+.app-wrapper-content{
     grid-area: content;
     background: #8fc2c7;
 }
