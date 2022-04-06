@@ -1,6 +1,6 @@
 export let store = {
-    getState() {
-      return this._state;
+    _rerenderEntireTree() {
+
     },
     _state: {
         dialogs: {
@@ -46,22 +46,27 @@ export let store = {
             ]
         }
     },
-    _rerenderEntireTree() {
 
-    },
-    addPost() {
-        let newpsot = {id: 7, message: this._state.profilePage.newPostText, likeCount: 0};
-        this._state.profilePage.posts.push(newpsot)
-        this._state.profilePage.newPostText = ''
-        this._rerenderEntireTree(this._state);
-    },
-    changeTextPost(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._rerenderEntireTree(this._state);
+    getState() {
+        return this._state;
     },
     subscriber(observer) {
         this._rerenderEntireTree = observer;
+    },
+
+    dispatch(action) {
+        if(action.type === 'ADD-POST'){
+            let newpsot = {id: 7, message: this._state.profilePage.newPostText, likeCount: 0};
+            this._state.profilePage.posts.push(newpsot)
+            this._state.profilePage.newPostText = ''
+            this._rerenderEntireTree(this._state);
+        }else if (action.type === 'CHANGE-TEXT-POST'){
+            debugger
+            this._state.profilePage.newPostText = action.newText;
+            this._rerenderEntireTree(this._state);
+        }
     }
+
 }
 
 

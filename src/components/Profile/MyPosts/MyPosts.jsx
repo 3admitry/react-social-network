@@ -7,11 +7,11 @@ export const MyPosts = (props) => {
     let postMessage = useRef(null);
 
     const addNewPostHandler = () => {
-        props.addPost()
+        props.dispatch({type:'ADD-POST'})
     }
 
     const textAreaHandler = () => {
-        props.changeTextPost(postMessage.current.value)
+        props.dispatch({type: 'CHANGE-TEXT-POST', newText: postMessage.current.value})
     }
 
     return (

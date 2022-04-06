@@ -6,8 +6,8 @@ export const Profile = (props) => {
 
     return (
         <>
-            <ProfileInfo addpost={props.addpost}/>
-            <MyPosts profilePage={props.profilePage} addPost={props.addPost} changeTextPost={props.changeTextPost}/>
+            <ProfileInfo />
+            <MyPosts profilePage={props.profilePage} dispatch={props.dispatch} />
         </>
     )
 }
