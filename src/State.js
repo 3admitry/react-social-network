@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const CHANGE_TEXT_POST = 'CHANGE-TEXT-POST';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const CHANGE_TEXTAREA_POST = 'CHANGE-TEXTAREA-POST';
+
 export let store = {
     _rerenderEntireTree() {
 
@@ -5,7 +10,11 @@ export let store = {
     _state: {
         dialogs: {
             dialogsItems: [
-                {id: 1, name: 'July', avaUrl: 'https://html5css.ru/howto/img_avatar2.png'},
+                {
+                    id: 1,
+                    name: 'July',
+                    avaUrl: 'https://html5css.ru/howto/img_avatar2.png'
+                },
                 {
                     id: 2,
                     name: 'Dmitry',
@@ -33,6 +42,7 @@ export let store = {
                 {id: 3, message: 'Fine, thanks'},
                 {id: 4, message: 'Bye'},
             ],
+            newMessage: '',
         },
         profilePage: {
             newPostText: '',
@@ -55,19 +65,40 @@ export let store = {
     },
 
     dispatch(action) {
-        if(action.type === 'ADD-POST'){
-            let newpsot = {id: 7, message: this._state.profilePage.newPostText, likeCount: 0};
-            this._state.profilePage.posts.push(newpsot)
-            this._state.profilePage.newPostText = ''
-            this._rerenderEntireTree(this._state);
-        }else if (action.type === 'CHANGE-TEXT-POST'){
-            debugger
-            this._state.profilePage.newPostText = action.newText;
-            this._rerenderEntireTree(this._state);
+        switch (action.type) {
+            case ADD_POST:
+                if (!this._state.profilePage.newPostText) return false;
+                let newpost = {id: 7, message: this._state.profilePage.newPostText, likeCount: 0};
+                this._state.profilePage.posts.push(newpost)
+                this._state.profilePage.newPostText = ''
+                this._rerenderEntireTree(this._state);
+                break;
+            case CHANGE_TEXT_POST:
+                this._state.profilePage.newPostText = action.newText;
+                this._rerenderEntireTree(this._state);
+                break;
+            case ADD_MESSAGE:
+                if (!this._state.dialogs.messages) return false;
+                let newpMessage = {id: 5, message: this._state.dialogs.newMessage};
+                this._state.dialogs.messages.push(newpMessage);
+                this._state.dialogs.newMessage = '';
+                this._rerenderEntireTree(this._state);
+                break;
+            case CHANGE_TEXTAREA_POST:
+                this._state.dialogs.newMessage = action.newMessage;
+                this._rerenderEntireTree(this._state);
+                break;
         }
     }
-
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const changeTextPostActionCreator = (text) => ({type: CHANGE_TEXT_POST, newText: text})
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const changeTextAreaPostActionCreator = (text) => ({type: CHANGE_TEXTAREA_POST, newMessage: text})
+
+window.store = store;
+//store - OPP
 
 
 

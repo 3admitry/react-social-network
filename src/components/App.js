@@ -13,9 +13,12 @@ function App(props) {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route key='1' path='/profile'
-                           element={<Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
-                    <Route key='2' path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogs}/>}/>
+                    <Route key='1' path='/profile' element={
+                        <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>
+                    }/>
+                    <Route key='2' path='/dialogs/*' element={
+                        <Dialogs dialogs={props.state.dialogs} dispatch={props.dispatch}/>
+                    }/>
                 </Routes>
             </div>
         </div>
