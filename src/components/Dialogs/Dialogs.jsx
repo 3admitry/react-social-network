@@ -2,8 +2,7 @@ import React, {useRef} from 'react';
 import m from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {NavLink} from "react-router-dom";
-import {addMessageActionCreator, changeTextAreaPostActionCreator} from "../../State";
+import {addMessageActionCreator, changeTextAreaPostActionCreator} from "../../redux/dialogsReducer";
 
 export const Dialogs = (props) => {
 

@@ -1,13 +1,12 @@
 import React, {useRef} from "react";
 import {Post} from "./Post/Post";
-import {addPostActionCreator, changeTextPostActionCreator} from "../../../State";
+import {addPostActionCreator, changeTextPostActionCreator} from "../../../redux/profileReducer";
 
 export const MyPosts = (props) => {
 
-    let postsElement = props.profilePage.posts.map((p, i) => <Post key={i} message={p.message} likeCount={p.likeCount}/>)
+    let postsElement = props.profilePage.posts.map((p, i) => <Post key={i} message={p.message}
+                                                                   likeCount={p.likeCount}/>)
     let postMessage = useRef(null);
-
-
 
     const addNewPostHandler = () => {
         // props.dispatch({type:'ADD-POST'})
@@ -21,9 +20,9 @@ export const MyPosts = (props) => {
 
     return (
         <div>
-            Mypost
+            <h2>Mypost</h2>
             <div>
-                <textarea ref={postMessage} onChange={textAreaHandler} value={props.profilePage.newPostText} />
+                <textarea ref={postMessage} onChange={textAreaHandler} value={props.profilePage.newPostText}/>
                 <button onClick={addNewPostHandler}>Add New Post</button>
             </div>
             <div>

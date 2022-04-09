@@ -1,13 +1,17 @@
-const ADD_POST = 'ADD-POST';
-const CHANGE_TEXT_POST = 'CHANGE-TEXT-POST';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const CHANGE_TEXTAREA_POST = 'CHANGE-TEXTAREA-POST';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
 
 export let store = {
-    _rerenderEntireTree() {
-
+    _callSubscriber() {
+        console.log('Subscriber is empty');
     },
     _state: {
+        sidebar: [
+            {},
+            {},
+            {},
+        ],
         dialogs: {
             dialogsItems: [
                 {
@@ -61,41 +65,18 @@ export let store = {
         return this._state;
     },
     subscriber(observer) {
-        this._rerenderEntireTree = observer;
+        this._callSubscriber = observer;
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                if (!this._state.profilePage.newPostText) return false;
-                let newpost = {id: 7, message: this._state.profilePage.newPostText, likeCount: 0};
-                this._state.profilePage.posts.push(newpost)
-                this._state.profilePage.newPostText = ''
-                this._rerenderEntireTree(this._state);
-                break;
-            case CHANGE_TEXT_POST:
-                this._state.profilePage.newPostText = action.newText;
-                this._rerenderEntireTree(this._state);
-                break;
-            case ADD_MESSAGE:
-                if (!this._state.dialogs.messages) return false;
-                let newpMessage = {id: 5, message: this._state.dialogs.newMessage};
-                this._state.dialogs.messages.push(newpMessage);
-                this._state.dialogs.newMessage = '';
-                this._rerenderEntireTree(this._state);
-                break;
-            case CHANGE_TEXTAREA_POST:
-                this._state.dialogs.newMessage = action.newMessage;
-                this._rerenderEntireTree(this._state);
-                break;
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogs = dialogsReducer(this._state.dialogs, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
+        this._callSubscriber(this._state);
     }
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const changeTextPostActionCreator = (text) => ({type: CHANGE_TEXT_POST, newText: text})
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const changeTextAreaPostActionCreator = (text) => ({type: CHANGE_TEXTAREA_POST, newMessage: text})
 
 window.store = store;
 //store - OPP
