@@ -2,8 +2,8 @@ import '../App.css';
 import {Header} from "./Header/Header";
 import {Navbar} from "./Navbar/Navbar";
 import {Profile} from "./Profile/Profile";
-import {Dialogs} from "./Dialogs/Dialogs";
 import {Routes, Route} from "react-router-dom";
+import {DialogsContainer} from "./Dialogs/DialogsContainer";
 
 function App(props) {
 
@@ -14,10 +14,10 @@ function App(props) {
             <div className="app-wrapper-content">
                 <Routes>
                     <Route key='1' path='/profile' element={
-                        <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>
+                        <Profile/>
                     }/>
                     <Route key='2' path='/dialogs/*' element={
-                        <Dialogs dialogs={props.state.dialogs} dispatch={props.dispatch}/>
+                        <DialogsContainer/>
                     }/>
                 </Routes>
             </div>

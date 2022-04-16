@@ -3,16 +3,16 @@ import dialogsReducer from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 
 export let store = {
-    _callSubscriber() {
+    _callSubscribe() {
         console.log('Subscriber is empty');
     },
     _state: {
-        sidebar: [
+        sidebarPage: [
             {},
             {},
             {},
         ],
-        dialogs: {
+        dialogsPage: {
             dialogsItems: [
                 {
                     id: 1,
@@ -64,17 +64,17 @@ export let store = {
     getState() {
         return this._state;
     },
-    subscriber(observer) {
-        this._callSubscriber = observer;
+    subscribe(observer) {
+        this._callSubscribe = observer;
     },
 
     dispatch(action) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.dialogs = dialogsReducer(this._state.dialogs, action);
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action);
 
-        this._callSubscriber(this._state);
+        this._callSubscribe(this._state);
     }
 }
 
