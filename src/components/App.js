@@ -3,7 +3,7 @@ import {Header} from "./Header/Header";
 import {Navbar} from "./Navbar/Navbar";
 import {Profile} from "./Profile/Profile";
 import {Routes, Route} from "react-router-dom";
-import {DialogsContainer} from "./Dialogs/DialogsContainer";
+import DialogsContainer from "./Dialogs/DialogsContainer";
 
 function App(props) {
 

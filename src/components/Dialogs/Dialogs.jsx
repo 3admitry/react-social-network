@@ -5,11 +5,11 @@ import {Message} from "./Message/Message";
 
 export const Dialogs = (props) => {
 
-    let dialogItems = props.state.dialogsItems.map((d, i) => {
+    let dialogItems = props.dialogsPage.dialogsItems.map((d, i) => {
         return <DialogItem key={i} name={d.name} id={d.id} avatar={d.avaUrl}/>
     })
-    let messagesItems = props.state.messages.map((m, i) => <Message key={i} message={m.message}/>)
-    let newMessage = props.state.newMessage
+    let messagesItems = props.dialogsPage.messages.map((m, i) => <Message key={i} message={m.message}/>)
+    let newMessage = props.dialogsPage.newMessage
     let changedMessage = useRef(null);
 
     const onChangeTextAreaHandler = () => {

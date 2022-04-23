@@ -44,12 +44,19 @@ const dialogsReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             if (!state.messages) return false;
             let newpMessage = {id: 5, message: state.newMessage};
-            state.messages.push(newpMessage);
-            state.newMessage = '';
-            return state;
+            return {
+                ...state,
+                messages: [
+                    ...state.messages,
+                    newpMessage
+                ],
+                newMessage: ''
+            };
         case CHANGE_TEXTAREA_POST:
-            state.newMessage = action.newMessage;
-            return state;
+            return {
+                ...state,
+                newMessage: action.newMessage
+            };
         default:
             return state;
     }
