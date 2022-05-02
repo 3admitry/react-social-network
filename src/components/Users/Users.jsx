@@ -1,11 +1,20 @@
 import React from 'react';
 import s from './Users.module.css';
+import axios from "axios";
+import defaultUserPhoto from '../../assets/images/user.jpg';
 
 const Users = (props) => {
     debugger
     console.log('RENDER USERS')
     if(props.users.length===0){
-        props.setUsers([
+
+        axios
+            .get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                props.setUsers(response.data.items)
+            })
+
+       /* props.setUsers([
             {
                 id: '1',
                 followed: false,
@@ -50,8 +59,11 @@ const Users = (props) => {
                     country: 'Georgia'
                 },
             }
-        ])
+        ])*/
     }
+
+
+
     return (
         <div style={{padding: '1rem'}}>
             {props.users.map(u => {
@@ -59,7 +71,7 @@ const Users = (props) => {
                     <div key={u.id} style={{padding: '1rem'}} className={s.userBox}>
                         <div style={{width: '100px'}}>
                             <div>
-                                <img className={s.ava} src={u.avaUrl}/>
+                                <img className={s.ava} src={u.photos.small !== null ? u.photos.small:defaultUserPhoto}/>
                             </div>
                             <div>
                                 {
@@ -70,12 +82,12 @@ const Users = (props) => {
                             </div>
                         </div>
                         <div style={{width: '244px'}}>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </div>
                         <div>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.cityName}</div>
+                            <div>{'u.location.country'}</div>
+                            <div>{'u.location.cityName'}</div>
                         </div>
 
                     </div>)
