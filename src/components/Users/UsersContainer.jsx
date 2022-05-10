@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import {followAC, setUsersAC, unfollowAC} from "../../redux/usersReducer";
+import {HocAccordion} from "../common/hoc-accordion";
 
 
 
@@ -27,4 +28,5 @@ let mapDispatchToProps = (dispatch) => {
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
 
-export default UsersContainer;
+// export default HocAccordion(UsersContainer);
+export default HocAccordion(UsersContainer);
