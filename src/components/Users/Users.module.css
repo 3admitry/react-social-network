@@ -10,3 +10,16 @@
 .userBox div{
 
 }
+.pagination{
+    list-style: none;
+}
+.pagination .item{
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.selectedPage {
+    font-weight: bold;
+    color: dodgerblue;
+}

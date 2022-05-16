@@ -7,17 +7,45 @@ class Users extends React.Component {
 
     componentDidMount() {
         axios
-            .get('https://social-network.samuraijs.com/api/1.0/users')
+            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
             .then(response => {
-                if(this.props.users.length === 0){
-                    this.props.setUsers(response.data.items)
+                if (this.props.users.length === 0) {
+                    this.props.setUsers(response.data.items);
+                    this.props.setTotalPages(response.data.totalCount)
                 }
+            })
+    };
+
+
+    paginationClickHandler = (newPage) => {
+        this.props.setCurrentPage(newPage);
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${newPage}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
             })
     }
 
     render() {
+
+        let countPages = Math.ceil(this.props.totalPages / this.props.pageSize);
+        let pages = [];
+        for (let i = 1; i < countPages; i++) {
+            pages.push(i)
+        }
+
         return (
             <div style={{padding: '1rem'}}>
+                <ul className={s.pagination}>
+                    {pages.map(el => {
+                        return <li key={'paginationItem-' + el}
+                                   className={`${s.item} ` + (this.props.currentPage === el && s.selectedPage)}
+                                   onClick={() => (this.paginationClickHandler(el))}
+                        >
+                            {el}
+                        </li>
+                    })}
+                </ul>
                 {this.props.users.map(u => {
                     return (
                         <div key={u.id} style={{padding: '1rem'}} className={s.userBox}>
