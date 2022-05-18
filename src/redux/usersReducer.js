@@ -58,12 +58,12 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const followAC = (id) => ({type: FOLLOW, userID: id});
-export const unfollowAC = (id) => ({type: UNFOLLOW, userID: id});
-export const setUsersAC = (usersArr) => ({type: SET_USERS, users: usersArr});
-export const setCurrentPageAC = (currentPage) => ({type: SET_PAGE, currentPage});
-export const setPageSizeAC = (pageSize) => ({type: SET_PAGE_SIZE, pageSize});
-export const setTotalPagesAC = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
-export const toogleIsFetchingAC = (isFetching) => ({type: TOOGLE_IS_FETCHING, isFetching});
+export const followUser = (id) => ({type: FOLLOW, userID: id});
+export const unfollowUser = (id) => ({type: UNFOLLOW, userID: id});
+export const setUsers = (usersArr) => ({type: SET_USERS, users: usersArr});
+export const setCurrentPage = (currentPage) => ({type: SET_PAGE, currentPage});
+export const setPageSize = (pageSize) => ({type: SET_PAGE_SIZE, pageSize});
+export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
+export const toogleIsFetching = (isFetching) => ({type: TOOGLE_IS_FETCHING, isFetching});
 
 export default usersReducer;

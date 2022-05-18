@@ -2,6 +2,8 @@ import React from 'react';
 import s from './Users.module.css';
 import defaultUserPhoto from '../../assets/images/user.jpg';
 import {Button, Pagination} from "antd";
+import c from "../Navbar/Navbar.module.css";
+import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
 /*    let countPages = Math.ceil(props.totalPages / props.pageSize);
@@ -33,8 +35,10 @@ const Users = (props) => {
                     <div key={u.id} style={{padding: '1rem'}} className={s.userBox}>
                         <div style={{width: '100px'}}>
                             <div>
+                                <NavLink to={`/profile/${u.id}`}>
                                 <img className={s.ava}
                                      src={u.photos.small !== null ? u.photos.small : defaultUserPhoto}/>
+                                </NavLink>
                             </div>
                             <div>
                                 {

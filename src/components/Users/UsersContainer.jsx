@@ -2,15 +2,16 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    followAC,
-    setCurrentPageAC, setPageSizeAC,
-    setTotalPagesAC,
-    setUsersAC,
-    toogleIsFetchingAC,
-    unfollowAC
+    followUser,
+    setCurrentPage,
+    setPageSize,
+    setTotalPages,
+    setUsers,
+    toogleIsFetching,
+    unfollowUser
 } from "../../redux/usersReducer";
 import axios from "axios";
-import {Button, Spin} from "antd";
+import {Spin} from "antd";
 import 'antd/dist/antd.css'
 
 class UsersContainer extends React.Component {
@@ -88,31 +89,15 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        followUser: (id) => {
-            dispatch(followAC(id))
-        },
-        unfollowUser: (id) => {
-            dispatch(unfollowAC(id))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (newPage) => {
-            dispatch(setCurrentPageAC(newPage))
-        },
-        setTotalPages: (totalPages) => {
-            dispatch(setTotalPagesAC(totalPages))
-        },
-        toogleIsFetching: (isFetching) => {
-            dispatch(toogleIsFetchingAC(isFetching))
-        },
-        setPageSize: (pageSize) => {
-            dispatch(setPageSizeAC(pageSize))
-        },
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+    followUser,
+    unfollowUser,
+    setUsers,
+    setCurrentPage,
+    setPageSize,
+    setTotalPages,
+    toogleIsFetching,
+
+})(UsersContainer);
 //export default HocAccordion(UsersContainer);
