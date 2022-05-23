@@ -2,7 +2,8 @@ import React from "react";
 import c from "./Header.module.css"
 import {NavLink} from "react-router-dom";
 
-export const Header = () => {
+export const Header = (props) => {
+    debugger
     return (
         <header className={c.header}>
             <div>
@@ -11,6 +12,11 @@ export const Header = () => {
                         src="https://toppng.com/public/uploads/thumbnail/marketing-wolf-logo-wolf-head-logo-11562912326iggh3h7nby.png"
                         alt=""/>
                 </NavLink>
+                <div>
+
+                    {props.isAuth ? <span>{props.login}</span> : <NavLink to="/login">Login</NavLink>}
+                </div>
+
             </div>
             {/*<h1>Header</h1>*/}
         </header>
