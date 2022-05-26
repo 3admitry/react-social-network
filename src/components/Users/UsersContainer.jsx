@@ -10,69 +10,42 @@ import {
     toogleIsFetching,
     unfollowUser
 } from "../../redux/usersReducer";
-import axios from "axios";
 import {Spin} from "antd";
 import 'antd/dist/antd.css'
+import {getUsers} from "../../api/api";
 
 class UsersContainer extends React.Component {
+
     componentDidMount() {
         this.props.toogleIsFetching(true);
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
-            .then(response => {
-                this.props.toogleIsFetching(false);
-                if (this.props.users.length === 0) {
-                    this.props.setUsers(response.data.items);
-                    this.props.setTotalPages(response.data.totalCount)
-                }
-            })
+        getUsers(this.props.pageSize, this.props.currentPage).then(data => {
+            this.props.toogleIsFetching(false);
+            if (this.props.users.length === 0) {
+                this.props.setUsers(data.items);
+                this.props.setTotalPages(data.totalCount)
+            }
+        })
     };
 
     paginationClickHandler = (newPage, pageSize) => {
         this.props.setCurrentPage(newPage);
         this.props.toogleIsFetching(true);
         this.props.setPageSize(pageSize);
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${newPage}`)
-            .then(response => {
-                this.props.toogleIsFetching(false);
-                this.props.setUsers(response.data.items);
-            })
+        getUsers(pageSize, newPage).then(data => {
+            //debugger
+            this.props.toogleIsFetching(false);
+            this.props.setUsers(data.items);
+        })
     }
 
     render() {
         return (
             <>
                 {this.props.isFetching
-                    ? <Spin tip="Loading..."> <Users {...this.props}
-                                                     paginationClickHandler={this.paginationClickHandler}/>
+                    ? <Spin tip="Loading...">
+                        <Users {...this.props} paginationClickHandler={this.paginationClickHandler}/>
                     </Spin>
                     : <Users {...this.props} paginationClickHandler={this.paginationClickHandler}/>}
-
-                {/*
-                <Users {...this.props}
-                       totalPages={this.props.totalPages}
-                       pageSize={this.props.pageSize}
-                       currentPage={this.props.currentPage}
-                       paginationClickHandler={this.paginationClickHandler}
-                       users={this.props.users}
-                       followUser={this.props.followUser}
-                       unfollowUser={this.props.unfollowUser}
-                />
-*/}
-
-                {/*
-
-                totalPages={this.props.totalPages}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
-                paginationClickHandler={this.paginationClickHandler}
-                users={this.props.users}
-                followUser={this.props.followUser}
-                unfollowUser={this.props.unfollowUser}
-*/}
-
-
             </>
         )
 

@@ -4,26 +4,22 @@ import axios from "axios";
 import {setAuthData} from "../../redux/authReducer";
 import {Header} from "./Header";
 import c from "./Header.module.css"
+import {getAuth} from "../../api/api";
 
 class HeaderCointainer extends React.Component {
     componentDidMount() {
-        axios
-            .get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-                withCredentials: true,
-            })
-            .then((response) => {
-                //debugger
-                if (response.data.resultCode === 0) {
-                    this.props.setAuthData(response.data.data);
-                }
-            })
+        getAuth().then((data)=>{
+            if (data.resultCode === 0) {
+                this.props.setAuthData(data.data);
+            }
+        })
     }
 
     render() {
         return (
-            <header className={c.header}>
+            <>
                 <Header {...this.props} />
-            </header>
+            </>
         )
     }
 }
