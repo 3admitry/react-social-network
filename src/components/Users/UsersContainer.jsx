@@ -7,7 +7,7 @@ import {
     setPageSize,
     setTotalPages,
     setUsers,
-    toogleIsFetching,
+    toogleIsFetching, toogleIsFollowHandler,
     unfollowUser
 } from "../../redux/usersReducer";
 import {Spin} from "antd";
@@ -59,6 +59,8 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalPages: state.usersPage.totalPages,
         isFetching: state.usersPage.isFetching,
+        isLoadingFollowHandler: state.usersPage.isLoadingFollowHandler,
+        followHandlerArrayOfUsers: state.usersPage.followHandlerArrayOfUsers,
     }
 }
 
@@ -71,6 +73,6 @@ export default connect(mapStateToProps, {
     setPageSize,
     setTotalPages,
     toogleIsFetching,
-
+    toogleIsFollowHandler,
 })(UsersContainer);
 //export default HocAccordion(UsersContainer);
