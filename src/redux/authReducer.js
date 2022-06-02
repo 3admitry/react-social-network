@@ -1,3 +1,5 @@
+import {API} from "../api/api";
+
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 
 let initialState = {
@@ -22,5 +24,15 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
+//AC
 export const setAuthData = (data) => ({type: SET_AUTH_DATA, data});
+
+// Thunks
+export const getAuth = () => (dispatch) => {
+    API.getAuth().then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthData(data.data));
+        }
+    })
+}
 export default authReducer;

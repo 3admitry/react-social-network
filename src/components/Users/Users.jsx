@@ -3,8 +3,6 @@ import s from './Users.module.css';
 import defaultUserPhoto from '../../assets/images/user.jpg';
 import {Button, Pagination} from "antd";
 import {NavLink} from "react-router-dom";
-import {followUser, unfollowUser} from "../../api/api";
-import {toogleIsFollowHandler} from "../../redux/usersReducer";
 
 const Users = (props) => {
     return (
@@ -26,23 +24,13 @@ const Users = (props) => {
                             <div>
                                 {
                                     u.followed
-                                        ? <Button disabled={props.followHandlerArrayOfUsers.some(id => id === u.id)} type="primary" onClick={() => {
-                                            props.toogleIsFollowHandler(true, u.id);
-                                            unfollowUser(u.id).then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.unfollowUser(u.id)
-                                                }
-                                                props.toogleIsFollowHandler(false, u.id)
-                                            })
+                                        ? <Button disabled={props.followHandlerArrayOfUsers.some(id => id === u.id)}
+                                                  type="primary" onClick={() => {
+                                            props.unFollow(u.id)
                                         }}>Unfollow</Button>
-                                        : <Button disabled={props.followHandlerArrayOfUsers.some(id => id === u.id)} type="primary" onClick={() => {
-                                            props.toogleIsFollowHandler(true, u.id);
-                                            followUser(u.id).then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.followUser(u.id)
-                                                }
-                                                props.toogleIsFollowHandler(false, u.id);
-                                            })
+                                        : <Button disabled={props.followHandlerArrayOfUsers.some(id => id === u.id)}
+                                                  type="primary" onClick={() => {
+                                            props.follow(u.id);
                                         }}>Follow</Button>
                                 }
                             </div>

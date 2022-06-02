@@ -1,18 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
-import axios from "axios";
-import {setAuthData} from "../../redux/authReducer";
+import {getAuth} from "../../redux/authReducer";
 import {Header} from "./Header";
-import c from "./Header.module.css"
-import {getAuth} from "../../api/api";
 
 class HeaderCointainer extends React.Component {
     componentDidMount() {
-        getAuth().then((data)=>{
+        this.props.getAuth();
+/*        API.getAuth().then((data)=>{
             if (data.resultCode === 0) {
                 this.props.setAuthData(data.data);
             }
-        })
+        })*/
     }
 
     render() {
@@ -31,4 +29,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setAuthData})(HeaderCointainer)
+export default connect(mapStateToProps, {getAuth})(HeaderCointainer)

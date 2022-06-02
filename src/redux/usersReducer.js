@@ -1,3 +1,5 @@
+import {API} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -78,6 +80,33 @@ export const setPageSize = (pageSize) => ({type: SET_PAGE_SIZE, pageSize});
 export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
 export const toogleIsFetching = (isFetching) => ({type: TOOGLE_IS_FETCHING, isFetching});
 export const toogleIsFollowHandler = (isFetching, id) => ({type: TOOGLE_IS_FOLLOW_HANDLER, isFetching, id});
-//export const toogleIsFollowHandler = (isFetching) => ({type: TOOGLE_IS_FOLLOW_HANDLER, isFetching});
+
+export const getUsers = (pageSize, currentPage) => (dispatch) => {
+    dispatch(toogleIsFetching(true));
+    API.getAllUsers(pageSize, currentPage).then(data => {
+        dispatch(toogleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalPages(data.totalCount));
+    })
+}
+
+export const unFollow = (userId) => (dispatch) => {
+    dispatch(toogleIsFollowHandler(true, userId));
+    API.unfollowUser(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(unfollowUser(userId));
+        }
+        dispatch(toogleIsFollowHandler(false, userId));
+    })
+}
+export const follow = (userId) => (dispatch) => {
+    dispatch(toogleIsFollowHandler(true, userId));
+    API.followUser(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(followUser(userId));
+        }
+        dispatch(toogleIsFollowHandler(false, userId));
+    })
+}
 
 export default usersReducer;
