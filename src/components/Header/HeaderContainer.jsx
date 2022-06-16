@@ -6,12 +6,14 @@ import {Header} from "./Header";
 class HeaderCointainer extends React.Component {
     componentDidMount() {
         this.props.getAuth();
+        console.log(this.props.isAuth);
 /*        API.getAuth().then((data)=>{
             if (data.resultCode === 0) {
                 this.props.setAuthData(data.data);
             }
         })*/
     }
+
 
     render() {
         return (
@@ -20,7 +22,9 @@ class HeaderCointainer extends React.Component {
             </>
         )
     }
+
 }
+
 
 let mapStateToProps = (state) => {
     return {

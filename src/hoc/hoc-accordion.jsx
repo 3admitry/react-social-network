@@ -8,6 +8,7 @@ useState падает в использовании синтаксиса воз�
 Необходимо использывать Function Declaration в возврате стрелочной функции, тогда будет все Ок
 см. пример на стр. 31
 */
+
 /*export const HocAccordion = (WrappedComponent) => {
     return (props) => {
         let [collapsed, setCollapsed] = useState(true)

@@ -55,7 +55,6 @@ export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userPro
 export const getUser = (userId) => (dispatch) => {
     API.getUserInfo(userId)
         .then(response => {
-            debugger
             dispatch(setUserProfile(response));
         })
 }

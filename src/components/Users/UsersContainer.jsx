@@ -4,6 +4,8 @@ import Users from "./Users";
 import {follow, getUsers, setCurrentPage, setPageSize, unFollow} from "../../redux/usersReducer";
 import {Spin} from "antd";
 import 'antd/dist/antd.css'
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
 
@@ -44,11 +46,14 @@ let mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {
-    follow,
-    unFollow,
-    setCurrentPage,
-    setPageSize,
-    getUsers
-})(UsersContainer);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        follow,
+        unFollow,
+        setCurrentPage,
+        setPageSize,
+        getUsers
+    }),
+)(UsersContainer);
 //export default HocAccordion(UsersContainer);
