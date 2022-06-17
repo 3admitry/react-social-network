@@ -9,6 +9,8 @@ export const ProfileInfo = (props) => {
         return <Spin />
 
     }
+
+
     return (
         <>
             <div className={mod.banner}>
@@ -16,10 +18,10 @@ export const ProfileInfo = (props) => {
             </div>
             <div>
                 <div>
-                    <img src={props.profile.photos.large} alt=""/>
+                    <img src={props.profile.photos?.large} alt=""/>
                 </div>
                 <div>
-                    <ProfileStatus status={'Hello world'}/>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 </div>
             </div>
 

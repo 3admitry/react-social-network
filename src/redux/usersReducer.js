@@ -83,7 +83,7 @@ export const toogleIsFollowHandler = (isFetching, id) => ({type: TOOGLE_IS_FOLLO
 
 export const getUsers = (pageSize, currentPage) => (dispatch) => {
     dispatch(toogleIsFetching(true));
-    API.getAllUsers(pageSize, currentPage).then(data => {
+    API.users.getAllUsers(pageSize, currentPage).then(data => {
         dispatch(toogleIsFetching(false));
         dispatch(setUsers(data.items));
         dispatch(setTotalPages(data.totalCount));
@@ -92,7 +92,7 @@ export const getUsers = (pageSize, currentPage) => (dispatch) => {
 
 export const unFollow = (userId) => (dispatch) => {
     dispatch(toogleIsFollowHandler(true, userId));
-    API.unfollowUser(userId).then(data => {
+    API.users.unfollowUser(userId).then(data => {
         if (data.resultCode === 0) {
             dispatch(unfollowUser(userId));
         }
@@ -101,7 +101,7 @@ export const unFollow = (userId) => (dispatch) => {
 }
 export const follow = (userId) => (dispatch) => {
     dispatch(toogleIsFollowHandler(true, userId));
-    API.followUser(userId).then(data => {
+    API.users.followUser(userId).then(data => {
         if (data.resultCode === 0) {
             dispatch(followUser(userId));
         }

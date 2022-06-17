@@ -9,43 +9,62 @@ const instance = axios.create({
 })
 
 export const API = {
-    getAllUsers(pageSize, currentPage) {
-        console.log(`users?count=${pageSize}&page=${currentPage}`);
-        return instance.get(`users?count=${pageSize}&page=${currentPage}`)
-            .then((response) => {
-                return response.data;
-            })
+    users: {
+        getAllUsers(pageSize, currentPage) {
+            return instance.get(`users?count=${pageSize}&page=${currentPage}`)
+                .then((response) => {
+                    return response.data;
+                })
+        },
+
+        followUser(idUser) {
+            return instance.post(`follow/${idUser}`)
+                .then(response => {
+                    return response.data;
+                })
+        },
+
+        unfollowUser(idUser) {
+            return instance.delete(`follow/${idUser}`)
+                .then(response => {
+                    return response.data;
+                })
+        },
+    },
+    profile: {
+        getUserInfo(userId) {
+            return instance.get(`profile/${userId}`)
+                .then(response => {
+                    return response.data;
+                })
+        },
+        getStatusProfile(userId) {
+            return instance.get(`/profile/status/${userId}`)
+                .then(response => {
+                    return response.data;
+                })
+        },
+        updateStatusProfile(newStatus) {
+            return instance.put(`/profile/status`, {status: newStatus});
+        },
+    },
+    auth: {
+        getAuth() {
+            return instance.get('auth/me')
+                .then((response) => {
+                    return response.data;
+                })
+        },
     },
 
-    followUser(idUser) {
-        return instance.post(`follow/${idUser}`)
-            .then(response => {
-                return response.data;
-            })
-    },
 
-    unfollowUser(idUser) {
-        return instance.delete(`follow/${idUser}`)
-            .then(response => {
-                return response.data;
-            })
-    },
 
-    getAuth() {
-        return instance.get('auth/me')
-            .then((response) => {
-                return response.data;
-            })
-    },
 
-    getUserInfo(userId) {
-        return instance.get(`profile/${userId}`)
-            .then(response => {
-                return response.data;
-            })
-    },
 
 }
+
+
+
 
 /*
 const instance = axios.create({

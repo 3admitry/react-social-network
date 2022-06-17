@@ -1,5 +1,5 @@
 import React from "react";
-import {getUser} from "../../redux/profileReducer";
+import {getProfileStatus, getUser, setUserProfileStatus, updateProfileStatus} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {withRouter} from "../../hoc/withRouter-hoc";
 import Profile from "./Profile";
@@ -12,10 +12,11 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if(!userId || !isFinite(+userId)){
-            userId = 2;
+            userId = 23554;
         }
 
         this.props.getUser(userId);
+        this.props.getProfileStatus(userId);
   /*      axios
             .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
@@ -39,11 +40,12 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         userProfile: state.profilePage.userProfile,
+        profileStatus: state.profilePage.status,
     }
 };
 
 export default compose(
-    withAuthRedirect,
-    connect(mapStateToProps, {getUser}),
+    // withAuthRedirect,
+    connect(mapStateToProps, {getUser, getProfileStatus, updateProfileStatus}),
     withRouter,
 )(ProfileContainer);

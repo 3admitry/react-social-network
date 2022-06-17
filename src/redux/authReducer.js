@@ -30,7 +30,7 @@ export const setAuthData = (data) => ({type: SET_AUTH_DATA, data});
 
 // Thunks
 export const getAuth = () => (dispatch) => {
-    API.getAuth().then((data) => {
+    API.auth.getAuth().then((data) => {
         if (data.resultCode === 0) {
             dispatch(setAuthData(data.data));
         }
