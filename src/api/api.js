@@ -55,6 +55,18 @@ export const API = {
                     return response.data;
                 })
         },
+        login(payload) {
+            return instance.post('auth/login', {
+                email: payload.email,
+                password: payload.password,
+                rememberMe: payload.rememberMe,
+                captcha: false,
+            })
+                .then((response) => {
+                    return response.data;
+                })
+        },
+
     },
 
 
