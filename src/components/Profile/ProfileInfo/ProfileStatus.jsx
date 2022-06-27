@@ -37,7 +37,6 @@ class ProfileStatus extends React.Component {
 
 
     render() {
-        console.log(this.props.status)
         return (
             <>
                 {!this.state.editMode &&

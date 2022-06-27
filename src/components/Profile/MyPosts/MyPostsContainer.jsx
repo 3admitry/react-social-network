@@ -15,8 +15,8 @@ let mapDispatchToProps = (dispatch) => {
         onChangeTextArea: (value) => {
           dispatch(changeTextPostActionCreator(value));
         },
-        addNewPost: () => {
-            dispatch(addPostActionCreator());
+        addNewPost: (newPostText) => {
+            dispatch(addPostActionCreator(newPostText));
         }
     }
 };
