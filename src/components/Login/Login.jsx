@@ -1,20 +1,24 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {API} from "../../api/api";
+import {loginTC} from "../../redux/authReducer";
+import {connect} from "react-redux";
+import {Navigate, NavLink} from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
     const {register, handleSubmit, watch, formState: {errors}} = useForm();
     //const onSubmit = data => console.log(data);
 
-    console.log(watch("login")); // watch input value by passing the name of it
-    console.log(watch("password")); // watch input value by passing the name of it
+   /* console.log(watch("login")); // watch input value by passing the name of it
+    console.log(watch("password")); // watch input value by passing the name of it*/
 
     const onSubmit = (data) => {
-        console.log(API.auth.login(data));
+        props.loginTC(data.email, data.password, data.rememberMe, true)
     }
 
     return (
         <div>
+            {props.isAuth && <Navigate to='/profile'/>}
             <h1>Login</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
@@ -42,5 +46,8 @@ const Login = () => {
         </div>
     );
 };
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth,
+})
 
-export default Login;
+export default connect(mapStateToProps,{loginTC})(Login);

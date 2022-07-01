@@ -13,26 +13,38 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_DATA:
-
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload,
             }
-
         default:
             return state;
     }
 }
 
 //AC
-export const setAuthData = (data) => ({type: SET_AUTH_DATA, data});
+export const setAuthData = (payload, isAuth) => ({type: SET_AUTH_DATA, payload: {...payload, isAuth}});
 
 // Thunks
 export const getAuth = () => (dispatch) => {
     API.auth.getAuth().then((data) => {
         if (data.resultCode === 0) {
-            dispatch(setAuthData(data.data));
+            dispatch(setAuthData(data.data, true));
+        }
+    })
+}
+export const loginTC = (email, password, rememberMe) => (dispatch) => {
+    API.auth.login(email, password, rememberMe).then((res) => {
+        if (res.data.resultCode === 0) {
+            dispatch(setAuthData({email, password, rememberMe}, true));
+            dispatch(getAuth());
+        }
+    })
+}
+export const logoutTC = () => (dispatch) => {
+    API.auth.logout().then((res) => {
+        if (res.data.resultCode === 0) {
+            dispatch(setAuthData({email: null, password: null, rememberMe: null}, false));
         }
     })
 }

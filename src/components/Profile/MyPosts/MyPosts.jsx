@@ -1,36 +1,16 @@
-import React, {useRef} from "react";
+import React from "react";
 import {Post} from "./Post/Post";
 import {useForm} from "react-hook-form";
-import {API} from "../../../api/api";
-
 
 export const MyPosts = (props) => {
-    const {register, handleSubmit, watch, formState: {errors}, resetField} = useForm();
-
-    let postMessage = useRef(null);
+    const {register, handleSubmit, formState: {errors}, resetField} = useForm();
     let postsElement = props.posts.map((p, i) => <Post key={i} message={p.message}
                                                        likeCount={p.likeCount}/>)
 
-    const addNewPostHandler = () => {
-        props.addNewPost();
-    }
-
-    // const textAreaHandler = () => {
-    //     props.onChangeTextArea(postMessage.current.value);
-    // }
-
-    const textAreaHandler = () => {
-
- /*       console.log(watch("post"))
-        console.log(typeof(watch("post")))
-        props.onChangeTextArea(watch("post"));*/
-    }
-
     const onSubmit = (data) => {
-        props.onChangeTextArea(data.post);
-        props.addNewPost();
+        props.addNewPost(data.post);
+        resetField('post');
     }
-
 
     return (
         <div style={{paddingLeft: '1rem'}}>
@@ -44,10 +24,6 @@ export const MyPosts = (props) => {
                     <input type="submit"/>
                 </div>
             </form>
-            <div>
-                <textarea ref={postMessage} onChange={textAreaHandler} value={props.newPostText}/>
-                <button onClick={addNewPostHandler}>Add New Post</button>
-            </div>
             <div>
                 {postsElement}
             </div>

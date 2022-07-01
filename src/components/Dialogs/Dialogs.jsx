@@ -1,30 +1,23 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import m from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {Navigate} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {useForm} from "react-hook-form";
 
 export const Dialogs = (props) => {
 
-
+    const {register, handleSubmit, formState: {errors}, resetField} = useForm();
     let dialogItems = props.dialogsPage.dialogsItems.map((d, i) => {
         return <DialogItem key={i} name={d.name} id={d.id} avatar={d.avaUrl}/>
     })
     let messagesItems = props.dialogsPage.messages.map((m, i) => <Message key={i} message={m.message}/>)
-    let newMessage = props.dialogsPage.newMessage
-    let changedMessage = useRef(null);
 
-    const onChangeTextAreaHandler = () => {
-        props.onChangeTextArea(changedMessage.current.value);
+
+
+    const onSubmit = (data) => {
+        props.addNewMessage(data.message);
+        resetField('post');
     }
-    const onClickButtonHandler = () => {
-        props.addNewMessage();
-    }
-
-    console.log(props.isAuth);
-
-
 
     return (
         <div className={m.dialogs}>
@@ -33,12 +26,16 @@ export const Dialogs = (props) => {
             </div>
             <div className={m.messages}>
                 {messagesItems}
-                <div>
-                    <textarea onChange={onChangeTextAreaHandler}
-                              ref={changedMessage}
-                              value={newMessage}/>
-                    <button onClick={onClickButtonHandler}>Add</button>
-                </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div>
+                        <textarea placeholder={'Type your message'} {...register("message", {required: true})} />
+                        {errors.post && <span>This field is required</span>}
+                    </div>
+                    <div>
+                        <input type="submit" value={'Send message'}/>
+                    </div>
+                </form>
+
             </div>
         </div>
     );

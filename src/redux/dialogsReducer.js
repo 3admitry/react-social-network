@@ -42,13 +42,11 @@ const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_MESSAGE:
-            if (!state.messages) return false;
-            let newpMessage = {id: 5, message: state.newMessage};
             return {
                 ...state,
                 messages: [
                     ...state.messages,
-                    newpMessage
+                    {id: 5, message: action.newMessage}
                 ],
                 newMessage: ''
             };
@@ -62,7 +60,7 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const addMessageActionCreator = (newMessage) => ({type: ADD_MESSAGE, newMessage})
 export const changeTextAreaPostActionCreator = (text) => ({type: CHANGE_TEXTAREA_POST, newMessage: text})
 
 export default dialogsReducer;

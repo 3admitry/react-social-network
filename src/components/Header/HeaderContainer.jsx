@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getAuth} from "../../redux/authReducer";
+import {getAuth, logoutTC} from "../../redux/authReducer";
 import {Header} from "./Header";
 
 class HeaderCointainer extends React.Component {
@@ -33,4 +33,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getAuth})(HeaderCointainer)
+export default connect(mapStateToProps, {getAuth, logoutTC})(HeaderCointainer)

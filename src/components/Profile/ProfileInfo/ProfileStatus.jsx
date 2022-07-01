@@ -39,6 +39,7 @@ class ProfileStatus extends React.Component {
     render() {
         return (
             <>
+                <span>My status: </span>
                 {!this.state.editMode &&
                     <div>
                         <span onClick={this.activateEditMode}>{this.state.status ? this.state.status:'Set your status'}</span>
