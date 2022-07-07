@@ -1,12 +1,14 @@
 import {API} from "../api/api";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
+const SET_ERROR = 'SET_ERROR';
 
 let initialState = {
     id: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    errorMessage: null,
     //isFetching: false,
 }
 
@@ -17,6 +19,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload,
             }
+        case SET_ERROR:
+            return {
+                ...state,
+                errorMessage: action.errorMessage,
+            }
         default:
             return state;
     }
@@ -24,6 +31,7 @@ const authReducer = (state = initialState, action) => {
 
 //AC
 export const setAuthData = (payload, isAuth) => ({type: SET_AUTH_DATA, payload: {...payload, isAuth}});
+export const setError = (errorMessage) => ({type: SET_ERROR, errorMessage});
 
 // Thunks
 export const getAuth = () => (dispatch) => {
@@ -38,6 +46,11 @@ export const loginTC = (email, password, rememberMe) => (dispatch) => {
         if (res.data.resultCode === 0) {
             dispatch(setAuthData({email, password, rememberMe}, true));
             dispatch(getAuth());
+            dispatch(setError(null))
+        }
+        else {
+            let message = res.data.messages.length>0 ? res.data.messages[0] : 'Some error';
+            dispatch(setError(message))
         }
     })
 }

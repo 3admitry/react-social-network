@@ -1,18 +1,29 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {API} from "../../api/api";
 import {loginTC} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {Navigate, NavLink} from "react-router-dom";
+import style from "./Login.module.css"
 
 const Login = (props) => {
-    const {register, handleSubmit, watch, formState: {errors}} = useForm();
+
+    const {register, handleSubmit, watch, setError, formState: {errors}} = useForm();
+
+    console.log(errors);
+    /*    if(props.errorMessage){
+            setError('password', {
+                type: "server",
+                message: props.errorMessage,
+            });
+        }*/
     //const onSubmit = data => console.log(data);
 
-   /* console.log(watch("login")); // watch input value by passing the name of it
-    console.log(watch("password")); // watch input value by passing the name of it*/
+    /* console.log(watch("login")); // watch input value by passing the name of it
+     console.log(watch("password")); // watch input value by passing the name of it*/
 
     const onSubmit = (data) => {
+        console.log(data)
         props.loginTC(data.email, data.password, data.rememberMe, true)
     }
 
@@ -33,6 +44,11 @@ const Login = (props) => {
                     {/* errors will return when field validation fails  */}
                     {errors.password && <span>This field is required</span>}
                 </div>
+                {props.errorMessage &&
+                    <div className={style.serverError}>
+                        {props.errorMessage && props.errorMessage}
+                    </div>
+                }
 
                 <div>
                     <input type={'checkbox'} {...register("rememberMe")} />
@@ -48,6 +64,7 @@ const Login = (props) => {
 };
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
+    errorMessage: state.auth.errorMessage
 })
 
-export default connect(mapStateToProps,{loginTC})(Login);
+export default connect(mapStateToProps, {loginTC})(Login);

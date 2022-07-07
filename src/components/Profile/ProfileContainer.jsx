@@ -5,14 +5,17 @@ import {withRouter} from "../../hoc/withRouter-hoc";
 import Profile from "./Profile";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {Navigate} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
 
 
     componentDidMount() {
         let userId = this.props.router.params.userId;
-        if(!userId || !isFinite(+userId)){
-            userId = 23554;
+        if(!userId || this.props.isAuth){
+            userId = this.props.authorizedUserId;
+        }else{
+            
         }
 
         this.props.getUser(userId);
@@ -41,6 +44,8 @@ let mapStateToProps = (state) => {
     return {
         userProfile: state.profilePage.userProfile,
         profileStatus: state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isAuth: state.auth.isAuth,
     }
 };
 
