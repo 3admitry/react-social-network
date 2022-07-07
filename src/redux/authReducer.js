@@ -1,4 +1,5 @@
 import {API} from "../api/api";
+import {setInitialize} from "./appReducer";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 const SET_ERROR = 'SET_ERROR';
@@ -35,11 +36,12 @@ export const setError = (errorMessage) => ({type: SET_ERROR, errorMessage});
 
 // Thunks
 export const getAuth = () => (dispatch) => {
-    API.auth.getAuth().then((data) => {
-        if (data.resultCode === 0) {
-            dispatch(setAuthData(data.data, true));
-        }
-    })
+    return API.auth.getAuth()
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthData(data.data, true));
+            }
+        })
 }
 export const loginTC = (email, password, rememberMe) => (dispatch) => {
     API.auth.login(email, password, rememberMe).then((res) => {
@@ -47,9 +49,8 @@ export const loginTC = (email, password, rememberMe) => (dispatch) => {
             dispatch(setAuthData({email, password, rememberMe}, true));
             dispatch(getAuth());
             dispatch(setError(null))
-        }
-        else {
-            let message = res.data.messages.length>0 ? res.data.messages[0] : 'Some error';
+        } else {
+            let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error';
             dispatch(setError(message))
         }
     })

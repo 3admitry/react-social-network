@@ -1,11 +1,18 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
-import {follow, getUsers, setCurrentPage, setPageSize, unFollow} from "../../redux/usersReducer";
+import {follow, fetchUsers, setCurrentPage, setPageSize, unFollow} from "../../redux/usersReducer";
 import {Spin} from "antd";
 import 'antd/dist/antd.css'
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage, getFollowHandlerArrayOfUsers,
+    getIsFetching,
+    getIsLoadingFollowHandler,
+    getPageSize,
+    getTotalPages, getUsers
+} from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component {
 
@@ -35,13 +42,13 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        currentPage: state.usersPage.currentPage,
-        pageSize: state.usersPage.pageSize,
-        totalPages: state.usersPage.totalPages,
-        isFetching: state.usersPage.isFetching,
-        isLoadingFollowHandler: state.usersPage.isLoadingFollowHandler,
-        followHandlerArrayOfUsers: state.usersPage.followHandlerArrayOfUsers,
+        users: getUsers(state),
+        currentPage: getCurrentPage(state),
+        pageSize: getPageSize(state),
+        totalPages: getTotalPages(state),
+        isFetching: getIsFetching(state),
+        isLoadingFollowHandler: getIsLoadingFollowHandler(state),
+        followHandlerArrayOfUsers: getFollowHandlerArrayOfUsers(state),
     }
 }
 
@@ -53,7 +60,7 @@ export default compose(
         unFollow,
         setCurrentPage,
         setPageSize,
-        getUsers
+        getUsers: fetchUsers
     }),
 )(UsersContainer);
 //export default HocAccordion(UsersContainer);

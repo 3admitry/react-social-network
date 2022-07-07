@@ -79,7 +79,7 @@ const instance = axios.create({
 */
 
 
-/*export const getUsers = (pageSize, currentPage) => {
+/*export const fetchUsers = (pageSize, currentPage) => {
     console.log(`users?count=${pageSize}&page=${currentPage}`);
     return instance.get(`users?count=${pageSize}&page=${currentPage}`)
         .then((response) => {

@@ -9,25 +9,14 @@ import {Navigate} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
 
-
     componentDidMount() {
         let userId = this.props.router.params.userId;
-        if(!userId || this.props.isAuth){
+        if (!userId || this.props.isAuth) {
             userId = this.props.authorizedUserId;
-        }else{
-            
         }
-
         this.props.getUser(userId);
         this.props.getProfileStatus(userId);
-  /*      axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                    this.props.setUserProfile(response.data);
-            })*/
-
-    };
-
+    }
 
     render() {
         return (
@@ -50,7 +39,7 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    // withAuthRedirect,
+    withAuthRedirect,
     connect(mapStateToProps, {getUser, getProfileStatus, updateProfileStatus}),
     withRouter,
 )(ProfileContainer);
