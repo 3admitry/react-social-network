@@ -1,5 +1,5 @@
 import React from 'react';
-import {addMessageActionCreator, changeTextAreaPostActionCreator} from "../../redux/dialogsReducer";
+import {addMessageAC, changeTextAreaPostAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -16,10 +16,10 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         addNewMessage: (value) => {
-            dispatch(addMessageActionCreator(value))
+            dispatch(addMessageAC(value))
         },
         onChangeTextArea: (value) => {
-            dispatch(changeTextAreaPostActionCreator(value))
+            dispatch(changeTextAreaPostAC(value))
         }
     }
 }

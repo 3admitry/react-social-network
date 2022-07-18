@@ -1,7 +1,6 @@
-import {API} from "../api/api";
 import {getAuth} from "./authReducer";
 
-const INITIALIZE_SUCCESS = 'INITIALIZE_SUCCESS';
+const INITIALIZE_SUCCESS = 'social-network/app/INITIALIZE_SUCCESS';
 
 let initialState = {
     initialize: false

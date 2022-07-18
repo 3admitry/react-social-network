@@ -3,6 +3,7 @@ import {Post} from "./Post/Post";
 import {useForm} from "react-hook-form";
 
 export const MyPosts = (props) => {
+
     const {register, handleSubmit, formState: {errors}, resetField} = useForm();
     let postsElement = props.posts.map((p, i) => <Post key={i} message={p.message}
                                                        likeCount={p.likeCount}/>)

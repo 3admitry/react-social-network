@@ -1,29 +1,33 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
-import {follow, fetchUsers, setCurrentPage, setPageSize, unFollow} from "../../redux/usersReducer";
+import {fetchUsers, follow, setCurrentPage, setPageSize, unFollow} from "../../redux/usersReducer";
 import {Spin} from "antd";
 import 'antd/dist/antd.css'
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {
-    getCurrentPage, getFollowHandlerArrayOfUsers,
+    getCurrentPage,
+    getFollowHandlerArrayOfUsers,
     getIsFetching,
     getIsLoadingFollowHandler,
     getPageSize,
-    getTotalPages, getUsers
+    getTotalPages,
+    getUsers
 } from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.pageSize, this.props.currentPage);
+        const {pageSize, currentPage} = this.props;
+        this.props.getUsers(pageSize, currentPage);
     };
 
     paginationClickHandler = (newPage, pageSize) => {
-        this.props.setCurrentPage(newPage);
-        this.props.setPageSize(pageSize);
-        this.props.getUsers(pageSize, newPage);
+        const {setCurrentPage, setPageSize, getUsers} = this.props;
+        setCurrentPage(newPage);
+        setPageSize(pageSize);
+        getUsers(pageSize, newPage);
     }
 
     render() {
@@ -51,7 +55,6 @@ let mapStateToProps = (state) => {
         followHandlerArrayOfUsers: getFollowHandlerArrayOfUsers(state),
     }
 }
-
 
 export default compose(
     withAuthRedirect,

@@ -1,7 +1,7 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const CHANGE_TEXTAREA_POST = 'CHANGE-TEXTAREA-POST';
+const ADD_MESSAGE = 'social-network/dialogs/ADD-MESSAGE';
+const CHANGE_TEXTAREA_POST = 'social-network/dialogs/CHANGE-TEXTAREA-POST';
 
-let initialState = {
+export const initialState = {
     dialogsItems: [
         {
             id: 1,
@@ -38,16 +38,13 @@ let initialState = {
     newMessage: '',
 }
 
-const dialogsReducer = (state = initialState, action) => {
+export const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [
-                    ...state.messages,
-                    {id: 5, message: action.newMessage}
-                ],
+                messages: [...state.messages, {id: 5, message: action.newMessage}],
                 newMessage: ''
             };
         case CHANGE_TEXTAREA_POST:
@@ -60,7 +57,7 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageActionCreator = (newMessage) => ({type: ADD_MESSAGE, newMessage})
-export const changeTextAreaPostActionCreator = (text) => ({type: CHANGE_TEXTAREA_POST, newMessage: text})
+export const addMessageAC = (newMessage) => ({type: ADD_MESSAGE, newMessage})
+export const changeTextAreaPostAC = (text) => ({type: CHANGE_TEXTAREA_POST, newMessage: text})
 
 export default dialogsReducer;

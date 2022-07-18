@@ -1,13 +1,13 @@
 import {API} from "../api/api";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_PAGE = 'SET_PAGE';
-const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
-const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES';
-const TOOGLE_IS_FETCHING = 'TOOGLE_IS_FETCHING';
-const TOOGLE_IS_FOLLOW_HANDLER = 'TOOGLE_IS_FOLLOW_HANDLER';
+const FOLLOW = 'social-network/users/FOLLOW';
+const UNFOLLOW = 'social-network/users/UNFOLLOW';
+const SET_USERS = 'social-network/users/SET_USERS';
+const SET_PAGE = 'social-network/users/SET_PAGE';
+const SET_PAGE_SIZE = 'social-network/users/SET_PAGE_SIZE';
+const SET_TOTAL_PAGES = 'social-network/users/SET_TOTAL_PAGES';
+const TOGGLE_IS_FETCHING = 'social-network/users/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOW_HANDLER = 'social-network/users/TOGGLE_IS_FOLLOW_HANDLER';
 
 let initialState = {
     users: [],
@@ -19,20 +19,17 @@ let initialState = {
     followHandlerArrayOfUsers: [],
 }
 
-const usersReducer = (state = initialState, action) => {
+export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u),
-
             }
-
         case UNFOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)
-
             }
         case SET_USERS:
             return {
@@ -54,14 +51,12 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 totalPages: action.totalPages,
             }
-        case TOOGLE_IS_FETCHING:
+        case TOGGLE_IS_FETCHING:
             return {
-
                 ...state,
                 isFetching: action.isFetching,
             }
-        case TOOGLE_IS_FOLLOW_HANDLER:
-
+        case TOGGLE_IS_FOLLOW_HANDLER:
             return {
                 ...state,
                 isLoadingFollowHandler: action.isFetching,
@@ -78,35 +73,41 @@ export const setUsers = (usersArr) => ({type: SET_USERS, users: usersArr});
 export const setCurrentPage = (currentPage) => ({type: SET_PAGE, currentPage});
 export const setPageSize = (pageSize) => ({type: SET_PAGE_SIZE, pageSize});
 export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
-export const toogleIsFetching = (isFetching) => ({type: TOOGLE_IS_FETCHING, isFetching});
-export const toogleIsFollowHandler = (isFetching, id) => ({type: TOOGLE_IS_FOLLOW_HANDLER, isFetching, id});
+export const toogleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const toogleIsFollowHandler = (isFetching, id) => ({type: TOGGLE_IS_FOLLOW_HANDLER, isFetching, id});
 
-export const fetchUsers = (pageSize, currentPage) => (dispatch) => {
+export const fetchUsers = (pageSize, currentPage) => async dispatch => {
     dispatch(toogleIsFetching(true));
-    API.users.getAllUsers(pageSize, currentPage).then(data => {
-        dispatch(toogleIsFetching(false));
+    try {
+        const data = await API.users.getAllUsers(pageSize, currentPage)
         dispatch(setUsers(data.items));
         dispatch(setTotalPages(data.totalCount));
-    })
+    } catch (error) {
+        console.error(error.message)
+    } finally {
+        dispatch(toogleIsFetching(false));
+    }
+}
+
+const setUserFollowUnfollow = async (dispatch, userId, methodAPI, actionCreator) => {
+    dispatch(toogleIsFollowHandler(true, userId));
+    try {
+        const data = await methodAPI(userId)
+        if (data.resultCode === 0) {
+            dispatch(actionCreator(userId));
+        }
+    } catch (e) {
+        console.error(e.message)
+    } finally {
+        dispatch(toogleIsFollowHandler(false, userId));
+    }
 }
 
 export const unFollow = (userId) => (dispatch) => {
-    dispatch(toogleIsFollowHandler(true, userId));
-    API.users.unfollowUser(userId).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(unfollowUser(userId));
-        }
-        dispatch(toogleIsFollowHandler(false, userId));
-    })
+    setUserFollowUnfollow(dispatch, userId, API.users.unfollowUser, unfollowUser)
 }
 export const follow = (userId) => (dispatch) => {
-    dispatch(toogleIsFollowHandler(true, userId));
-    API.users.followUser(userId).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(followUser(userId));
-        }
-        dispatch(toogleIsFollowHandler(false, userId));
-    })
+    setUserFollowUnfollow(dispatch, userId, API.users.followUser, followUser)
 }
 
 export default usersReducer;

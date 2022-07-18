@@ -1,12 +1,13 @@
 import {API} from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const CHANGE_TEXT_POST = 'CHANGE-TEXT-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_USER_PROFILE_STATUS = 'SET_USER_PROFILE_STATUS';
+const ADD_POST = 'social-network/profile/ADD-POST';
+const DELETE_POST = 'social-network/profile/DELETE_POST';
+const CHANGE_TEXT_POST = 'social-network/profile/CHANGE-TEXT-POST';
+const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE';
+const SET_USER_PROFILE_STATUS = 'social-network/profile/SET_USER_PROFILE_STATUS';
 
 
-let initialState = {
+export let initialState = {
     newPostText: '',
     posts: [
         {id: 1, message: 'Hello', likeCount: 5},
@@ -20,16 +21,13 @@ let initialState = {
     status: '',
 }
 
-const profileReducer = (state = initialState, action) => {
+export const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
             return {
                 ...state,
-                posts: [
-                    ...state.posts,
-                    {id: 7, message: action.newText, likeCount: 0}
-                ],
+                posts: [...state.posts, {id: 7, message: action.newText, likeCount: 0}],
                 newPostText: ''
             };
         case CHANGE_TEXT_POST:
@@ -47,38 +45,50 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.newStatus,
             };
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== action.postId),
+            };
         default:
             return state;
     }
 }
 //AC
-export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text})
+export const addPostAC = (text) => ({type: ADD_POST, newText: text})
+export const deletePostAC = (postId) => ({type: DELETE_POST, postId})
 export const changeTextPostActionCreator = (text) => ({type: CHANGE_TEXT_POST, newText: text})
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
 export const setUserProfileStatus = (newStatus) => ({type: SET_USER_PROFILE_STATUS, newStatus})
 
 //TC
-export const getUser = (userId) => (dispatch) => {
-    API.profile.getUserInfo(userId)
-        .then(response => {
-            dispatch(setUserProfile(response));
-        })
+export const getUser = (userId) => async dispatch => {
+    try {
+        const response = await API.profile.getUserInfo(userId)
+        dispatch(setUserProfile(response));
+    } catch (e) {
+        console.error(e.message)
+    }
 }
 
-export const getProfileStatus = (userId) => (dispatch) => {
-    API.profile.getStatusProfile(userId)
-        .then(response => {
-            dispatch(setUserProfileStatus(response));
-        })
+export const getProfileStatus = (userId) => async dispatch => {
+    try {
+        const response = await API.profile.getStatusProfile(userId)
+        dispatch(setUserProfileStatus(response));
+    } catch (e) {
+        console.error(e.message)
+    }
 }
 
-export const updateProfileStatus = (newStatus) => (dispatch) => {
-    API.profile.updateStatusProfile(newStatus)
-        .then(response => {
-            if(response.resultCode===0){
-                dispatch(setUserProfileStatus(newStatus));
-            }
-        })
+export const updateProfileStatus = (newStatus) => async dispatch => {
+    try {
+        const response = await API.profile.updateStatusProfile(newStatus)
+        if (response.resultCode === 0) {
+            dispatch(setUserProfileStatus(newStatus));
+        }
+    } catch (e) {
+        console.error(e.message)
+    }
 }
 
 export default profileReducer;

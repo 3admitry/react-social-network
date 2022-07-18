@@ -11,7 +11,7 @@ class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.router.params.userId;
-        if (!userId || this.props.isAuth) {
+        if (!userId && this.props.isAuth) {
             userId = this.props.authorizedUserId;
         }
         this.props.getUser(userId);
@@ -19,13 +19,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        return (
-            <>
-                <Profile {...this.props} />
-                {/*<ProfileInfo {...this.props}/>
-                <MyPostsContainer/>*/}
-            </>
-        );
+        return <><Profile {...this.props} /></>
     }
 };
 
