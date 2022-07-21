@@ -5,6 +5,7 @@ const DELETE_POST = 'social-network/profile/DELETE_POST';
 const CHANGE_TEXT_POST = 'social-network/profile/CHANGE-TEXT-POST';
 const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE';
 const SET_USER_PROFILE_STATUS = 'social-network/profile/SET_USER_PROFILE_STATUS';
+const SET_NEW_PROFILE_PHOTO = 'social-network/profile/SET_NEW_PROFILE_PHOTO';
 
 
 export let initialState = {
@@ -50,6 +51,11 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: state.posts.filter(post => post.id !== action.postId),
             };
+        case SET_NEW_PROFILE_PHOTO:
+            return {
+                ...state,
+                userProfile: {...state.userProfile, photos: action.file}
+            };
         default:
             return state;
     }
@@ -60,6 +66,7 @@ export const deletePostAC = (postId) => ({type: DELETE_POST, postId})
 export const changeTextPostActionCreator = (text) => ({type: CHANGE_TEXT_POST, newText: text})
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
 export const setUserProfileStatus = (newStatus) => ({type: SET_USER_PROFILE_STATUS, newStatus})
+export const updatePhotoSuccess = (file) => ({type: SET_NEW_PROFILE_PHOTO, file})
 
 //TC
 export const getUser = (userId) => async dispatch => {
@@ -85,6 +92,17 @@ export const updateProfileStatus = (newStatus) => async dispatch => {
         const response = await API.profile.updateStatusProfile(newStatus)
         if (response.resultCode === 0) {
             dispatch(setUserProfileStatus(newStatus));
+        }
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+
+export const savePhoto = (file) => async dispatch => {
+    try {
+        const response = await API.profile.updatePhotoProfile(file)
+        if (response.data.resultCode === 0) {
+            dispatch(updatePhotoSuccess(file));
         }
     } catch (e) {
         console.error(e.message)
