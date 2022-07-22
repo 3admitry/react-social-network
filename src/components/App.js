@@ -20,8 +20,8 @@ class App extends Component {
     }
 
     render() {
-        if(!this.props.initialize){
-            return  <Spin size="large" />
+        if (!this.props.initialize) {
+            return <Spin size="large"/>
         }
 
         return (
@@ -30,26 +30,18 @@ class App extends Component {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route key='1' path='/profile/:userId' element={
-                            <ProfileContainer/>
-                        }/>
+                        <Route key='1' path='/profile/:userId' element={<ProfileContainer/>}/>
                         <Route key='1-1' path='/profile/' element={<ProfileContainer/>}/>
-
-                        <Route key='2' path='/dialogs/*' element={
-                            <DialogsContainer/>
-                        }/>
-                        <Route key='3' path='/users' element={
-                            <UsersContainer/>
-                        }/>
-                        <Route key='4' path='/login' element={
-                            <Login/>
-                        }/>
+                        <Route key='2' path='/dialogs/*' element={<DialogsContainer/>}/>
+                        <Route key='3' path='/users' element={<UsersContainer/>}/>
+                        <Route key='4' path='/login' element={<Login/>}/>
                     </Routes>
                 </div>
             </div>
         );
     }
 }
+
 const mapStateToProps = (state) => {
     return {
         initialize: state.app.initialize

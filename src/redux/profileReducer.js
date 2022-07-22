@@ -54,7 +54,7 @@ export const profileReducer = (state = initialState, action) => {
         case SET_NEW_PROFILE_PHOTO:
             return {
                 ...state,
-                userProfile: {...state.userProfile, photos: action.file}
+                userProfile: {...state.userProfile, photos: action.photos}
             };
         default:
             return state;
@@ -66,10 +66,11 @@ export const deletePostAC = (postId) => ({type: DELETE_POST, postId})
 export const changeTextPostActionCreator = (text) => ({type: CHANGE_TEXT_POST, newText: text})
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
 export const setUserProfileStatus = (newStatus) => ({type: SET_USER_PROFILE_STATUS, newStatus})
-export const updatePhotoSuccess = (file) => ({type: SET_NEW_PROFILE_PHOTO, file})
+export const updatePhotoSuccess = (photos) => ({type: SET_NEW_PROFILE_PHOTO, photos})
 
 //TC
 export const getUser = (userId) => async dispatch => {
+
     try {
         const response = await API.profile.getUserInfo(userId)
         dispatch(setUserProfile(response));
@@ -102,7 +103,18 @@ export const savePhoto = (file) => async dispatch => {
     try {
         const response = await API.profile.updatePhotoProfile(file)
         if (response.data.resultCode === 0) {
-            dispatch(updatePhotoSuccess(file));
+            dispatch(updatePhotoSuccess(response.data.data.photos));
+        }
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+export const saveProfile = (formData) => async (dispatch, getState) => {
+    let userId = getState().auth.id;
+    try {
+        const response = await API.profile.updateProfile(formData)
+        if (response.data.resultCode === 0) {
+            dispatch(getUser(userId));
         }
     } catch (e) {
         console.error(e.message)
