@@ -1,18 +1,19 @@
+import React, {Component} from 'react';
 import '../App.css';
 import HeaderCointainer from "./Header/HeaderContainer";
 import {Navbar} from "./Navbar/Navbar";
-import ProfileContainer from './Profile/ProfileContainer'
-import {Routes, Route} from "react-router-dom";
-import DialogsContainer from "./Dialogs/DialogsContainer";
+import {Navigate, Route, Routes} from "react-router-dom";
 import UsersContainer from "./Users/UsersContainer";
 import Login from "./Login/Login";
-import {Component} from "react";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {getAuth} from "../redux/authReducer";
 import {withRouter} from "../hoc/withRouter-hoc";
 import {initializeApp} from "../redux/appReducer";
 import {Spin} from "antd";
+import {withSuspense} from "../hoc/withSuspense";
+
+const DialogsContainer = React.lazy(() => import('./Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./Profile/ProfileContainer'));
 
 class App extends Component {
     componentDidMount() {
@@ -24,15 +25,20 @@ class App extends Component {
             return <Spin size="large"/>
         }
 
+        // the way to use JSX to render component for prop. element of Route
+        const LazyProfileContainer = withSuspense(ProfileContainer)
+        const LazyDialogsContainer = withSuspense(DialogsContainer)
+
         return (
             <div className="app-wrapper">
                 <HeaderCointainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route key='1' path='/profile/:userId' element={<ProfileContainer/>}/>
-                        <Route key='1-1' path='/profile/' element={<ProfileContainer/>}/>
-                        <Route key='2' path='/dialogs/*' element={<DialogsContainer/>}/>
+                        <Route key='0' path='/' element={<Navigate to='/profile'/>}/>
+                        <Route key='1' path='/profile/:userId' element={<LazyProfileContainer/>}/>
+                        <Route key='1-1' path='/profile' element={<LazyProfileContainer/>}/>
+                        <Route key='2' path='/dialogs/*' element={<LazyDialogsContainer/>}/>
                         <Route key='3' path='/users' element={<UsersContainer/>}/>
                         <Route key='4' path='/login' element={<Login/>}/>
                     </Routes>

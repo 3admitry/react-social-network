@@ -6,9 +6,9 @@ import defaultUserPhoto from "../../../assets/images/user.jpg";
 import {ProfileDataForm} from "./ProfileDataForm";
 import {saveProfile} from "../../../redux/profileReducer";
 
-export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, errorMessage}) => {
 
-    let[editMode, setEditMode] = useState(false)
+    let [editMode, setEditMode] = useState(false)
 
     if (!profile) return <Spin/>
 
@@ -19,8 +19,9 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
     const switchEditMode = () => setEditMode(!editMode)
 
     const submitProfileForm = (data) => {
-        saveProfile(data)
-        switchEditMode()
+        saveProfile(data).then(()=>{
+            switchEditMode()
+        })
         //props.loginTC(data.email, data.password, data.rememberMe, true)
     }
 
@@ -39,8 +40,10 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                 </div>
                 {
                     editMode
-                        ?  <ProfileDataForm profile={profile} switchEditMode={switchEditMode} submitProfileForm={submitProfileForm}/>
-                        :  <ProfileData profile={profile} isOwner={isOwner} switchEditMode={switchEditMode}/>
+                        ? <ProfileDataForm profile={profile} switchEditMode={switchEditMode}
+                                           submitProfileForm={submitProfileForm}
+                                           errorMessage={errorMessage}/>
+                        : <ProfileData profile={profile} isOwner={isOwner} switchEditMode={switchEditMode}/>
                 }
 
             </div>
@@ -52,7 +55,9 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 const ProfileData = ({profile, isOwner, switchEditMode}) => {
     return (
         <div>
-            {isOwner && <div><button onClick={switchEditMode}>Edit profile</button></div>}
+            {isOwner && <div>
+                <button onClick={switchEditMode}>Edit profile</button>
+            </div>}
             <div>
                 <b>Full name:</b> {profile.fullName}
             </div>

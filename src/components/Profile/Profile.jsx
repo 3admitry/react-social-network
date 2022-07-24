@@ -3,7 +3,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {saveProfile} from "../../redux/profileReducer";
 
-const Profile = ({userProfile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile}) => {
+const Profile = ({userProfile, profileStatus, updateProfileStatus, isOwner, savePhoto, saveProfile, errorMessage}) => {
     return (
         <>
             <ProfileInfo
@@ -13,6 +13,7 @@ const Profile = ({userProfile, profileStatus, updateProfileStatus, isOwner, save
                 status={profileStatus}
                 updateStatus={updateProfileStatus}
                 saveProfile={saveProfile}
+                errorMessage={errorMessage}
             />
             <MyPostsContainer/>
         </>

@@ -1,7 +1,8 @@
 import React from "react";
-import {useForm} from "react-hook-form";
+import {useFieldArray, useForm} from "react-hook-form";
+import style from "../../Login/Login.module.css";
 
-export const ProfileDataForm = ({profile, submitProfileForm}) => {
+export const ProfileDataForm = ({profile, submitProfileForm, errorMessage}) => {
     const {register, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
             fullName: profile.fullName,
@@ -16,15 +17,20 @@ export const ProfileDataForm = ({profile, submitProfileForm}) => {
             <div>
                 <input type="submit" value={'Save'}/>
             </div>
+            {errorMessage &&
+                <div style={{color: 'red'}}>
+                    {errorMessage}
+                </div>
+            }
             <div>
                 <label htmlFor="fullName">Full name</label>
                 <input type={'text'} placeholder={'Full Name'} {...register("fullName", {required: true})} />
-                {errors.fullName && <span style={{color:'red'}}>This field is required</span>}
+                {errors.fullName && <span style={{color: 'red'}}>This field is required</span>}
             </div>
             <div>
                 <label htmlFor="aboutMe">About me</label>
                 <input type={'text'} placeholder={'About me'} {...register("aboutMe", {required: true})} />
-                {errors.aboutMe && <span style={{color:'red'}}>This field is required</span>}
+                {errors.aboutMe && <span style={{color: 'red'}}>This field is required</span>}
             </div>
             <div>
                 <label htmlFor="lookingForAJob">Looking for a job</label>
@@ -35,7 +41,7 @@ export const ProfileDataForm = ({profile, submitProfileForm}) => {
                 <label htmlFor="lookingForAJobDescription">Looking for a job description</label>
                 <input type={'text'}
                        placeholder={'Looking for a job description'} {...register("lookingForAJobDescription", {required: true})} />
-                {errors.lookingForAJobDescription && <span style={{color:'red'}}>This field is required</span>}
+                {errors.lookingForAJobDescription && <span style={{color: 'red'}}>This field is required</span>}
             </div>
 
             <div>
@@ -44,12 +50,12 @@ export const ProfileDataForm = ({profile, submitProfileForm}) => {
                         return (
                             <div key={index}>
                                 <div><label htmlFor={`contacts[${contact}]`}>{contact}</label></div>
-                                <input type={'text'}
-                                       placeholder={contact}
+                                <input type={'text'} placeholder={contact}
                                        {...register(`contacts[${contact}]`, {required: true})}
                                 />
-                                {/*{errors[`contacts[${contact}]`] && <span style={{color:'red'}}>This field is required</span>}*/}
-
+                                {errors[`contacts`] && errors[`contacts`][`${contact}`] &&
+                                    <span style={{color: 'red'}}>This field is required</span>}
+                                {/*{[${contact}]}*/}
                             </div>
                         )
                     })

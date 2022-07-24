@@ -1,4 +1,5 @@
 import {API} from "../api/api";
+import {setError} from "./authReducer";
 
 const ADD_POST = 'social-network/profile/ADD-POST';
 const DELETE_POST = 'social-network/profile/DELETE_POST';
@@ -6,6 +7,7 @@ const CHANGE_TEXT_POST = 'social-network/profile/CHANGE-TEXT-POST';
 const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE';
 const SET_USER_PROFILE_STATUS = 'social-network/profile/SET_USER_PROFILE_STATUS';
 const SET_NEW_PROFILE_PHOTO = 'social-network/profile/SET_NEW_PROFILE_PHOTO';
+const SET_ERROR = 'social-network/profile/SET_ERROR';
 
 
 export let initialState = {
@@ -20,6 +22,7 @@ export let initialState = {
     ],
     userProfile: null,
     status: '',
+    errorMessage: null,
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -56,6 +59,11 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 userProfile: {...state.userProfile, photos: action.photos}
             };
+        case SET_ERROR:
+            return {
+                ...state,
+                errorMessage: action.errorMessage,
+            }
         default:
             return state;
     }
@@ -115,9 +123,14 @@ export const saveProfile = (formData) => async (dispatch, getState) => {
         const response = await API.profile.updateProfile(formData)
         if (response.data.resultCode === 0) {
             dispatch(getUser(userId));
+            dispatch(setError(null))
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0].replace('(Contacts->','').replace(')','') : 'Some error';
+            dispatch(setError(message))
+            return Promise.reject(message)
         }
     } catch (e) {
-        console.error(e.message)
+        return Promise.reject(e.message)
     }
 }
 
