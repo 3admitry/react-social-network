@@ -39,7 +39,6 @@ export const initialState = {
 }
 
 export const dialogsReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case ADD_MESSAGE:
             return {
@@ -57,7 +56,7 @@ export const dialogsReducer = (state = initialState, action) => {
     }
 }
 
+//Actions creator
 export const addMessageAC = (newMessage) => ({type: ADD_MESSAGE, newMessage})
-export const changeTextAreaPostAC = (text) => ({type: CHANGE_TEXTAREA_POST, newMessage: text})
 
 export default dialogsReducer;

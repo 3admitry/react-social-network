@@ -3,12 +3,10 @@ import {setError} from "./authReducer";
 
 const ADD_POST = 'social-network/profile/ADD-POST';
 const DELETE_POST = 'social-network/profile/DELETE_POST';
-const CHANGE_TEXT_POST = 'social-network/profile/CHANGE-TEXT-POST';
 const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE';
 const SET_USER_PROFILE_STATUS = 'social-network/profile/SET_USER_PROFILE_STATUS';
 const SET_NEW_PROFILE_PHOTO = 'social-network/profile/SET_NEW_PROFILE_PHOTO';
 const SET_ERROR = 'social-network/profile/SET_ERROR';
-
 
 export let initialState = {
     newPostText: '',
@@ -26,18 +24,12 @@ export let initialState = {
 }
 
 export const profileReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case ADD_POST:
             return {
                 ...state,
                 posts: [...state.posts, {id: 7, message: action.newText, likeCount: 0}],
                 newPostText: ''
-            };
-        case CHANGE_TEXT_POST:
-            return {
-                ...state,
-                newPostText: action.newText
             };
         case SET_USER_PROFILE:
             return {
@@ -68,17 +60,16 @@ export const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
-//AC
+
+// Actions creator
 export const addPostAC = (text) => ({type: ADD_POST, newText: text})
 export const deletePostAC = (postId) => ({type: DELETE_POST, postId})
-export const changeTextPostActionCreator = (text) => ({type: CHANGE_TEXT_POST, newText: text})
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
 export const setUserProfileStatus = (newStatus) => ({type: SET_USER_PROFILE_STATUS, newStatus})
 export const updatePhotoSuccess = (photos) => ({type: SET_NEW_PROFILE_PHOTO, photos})
 
-//TC
+// Thunks
 export const getUser = (userId) => async dispatch => {
-
     try {
         const response = await API.profile.getUserInfo(userId)
         dispatch(setUserProfile(response));
@@ -86,7 +77,6 @@ export const getUser = (userId) => async dispatch => {
         console.error(e.message)
     }
 }
-
 export const getProfileStatus = (userId) => async dispatch => {
     try {
         const response = await API.profile.getStatusProfile(userId)
@@ -95,7 +85,6 @@ export const getProfileStatus = (userId) => async dispatch => {
         console.error(e.message)
     }
 }
-
 export const updateProfileStatus = (newStatus) => async dispatch => {
     try {
         const response = await API.profile.updateStatusProfile(newStatus)
@@ -106,7 +95,6 @@ export const updateProfileStatus = (newStatus) => async dispatch => {
         console.error(e.message)
     }
 }
-
 export const savePhoto = (file) => async dispatch => {
     try {
         const response = await API.profile.updatePhotoProfile(file)

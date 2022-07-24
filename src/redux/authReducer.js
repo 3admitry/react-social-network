@@ -1,5 +1,4 @@
 import {API} from "../api/api";
-import {setInitialize} from "./appReducer";
 
 const SET_AUTH_DATA = 'social-network/auth/SET_AUTH_DATA';
 const SET_ERROR = 'social-network/auth/SET_ERROR';
@@ -12,7 +11,6 @@ let initialState = {
     isAuth: false,
     errorMessage: null,
     captchaUrl: null
-    //isFetching: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -37,7 +35,7 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-//AC
+//Actions creator
 export const setAuthData = (payload, isAuth) => ({type: SET_AUTH_DATA, payload: {...payload, isAuth}});
 export const setCaptchaUrl = (captchaUrl) => ({type: SET_CAPTCHA_URL, payload: {captchaUrl}});
 export const setError = (errorMessage) => ({type: SET_ERROR, errorMessage});

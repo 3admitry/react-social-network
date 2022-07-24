@@ -4,7 +4,6 @@ import {Spin} from "antd";
 import ProfileStatus from "./ProfileStatus"
 import defaultUserPhoto from "../../../assets/images/user.jpg";
 import {ProfileDataForm} from "./ProfileDataForm";
-import {saveProfile} from "../../../redux/profileReducer";
 
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, errorMessage}) => {
 
@@ -12,17 +11,12 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 
     if (!profile) return <Spin/>
 
-    const handlerAvatarChange = (e) => {
-        savePhoto(e.target.files[0])
-    }
-
+    const handlerAvatarChange = (e) => savePhoto(e.target.files[0])
     const switchEditMode = () => setEditMode(!editMode)
-
     const submitProfileForm = (data) => {
-        saveProfile(data).then(()=>{
+        saveProfile(data).then(() => {
             switchEditMode()
         })
-        //props.loginTC(data.email, data.password, data.rememberMe, true)
     }
 
     return (
@@ -45,9 +39,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                                            errorMessage={errorMessage}/>
                         : <ProfileData profile={profile} isOwner={isOwner} switchEditMode={switchEditMode}/>
                 }
-
             </div>
-
         </>
     )
 }

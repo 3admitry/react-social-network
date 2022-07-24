@@ -1,0 +1,39 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-image: radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(83,138,214,1) 0%, rgba(134,231,214,1) 90% );
+  padding: .8rem 0;
+
+  .headerWrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logoLink {
+      color: white;
+      text-align: center;
+      line-height: 28px;
+
+      &Title {
+        font-weight: bold;
+        font-size: 30px;
+      }
+
+      &Desc {
+        font-size: 18px;
+        font-weight: 300;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  img {
+    width: 50px;
+    filter: brightness(8);
+  }
+}

@@ -1,0 +1,15 @@
+.appWrapper {
+
+  .globalContent {
+    max-width: 1024px;
+    margin: 0 auto;
+    margin-top: 8rem;
+    display: flex;
+    gap: 20px;
+  }
+  .mainContent{
+    flex: 1;
+  }
+}
+
+

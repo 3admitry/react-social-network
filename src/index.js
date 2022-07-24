@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import SocialNetworkApp from './components/SocialNetworkApp';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import store from './redux/reduxStore'
@@ -11,7 +11,7 @@ ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
-                <App />
+                <SocialNetworkApp />
             </Provider>
         </BrowserRouter>
     </React.StrictMode>,

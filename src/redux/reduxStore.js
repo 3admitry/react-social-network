@@ -20,7 +20,7 @@ let reducers = combineReducers({
 
 //Advanced store setup for Redux dev tools (Chrome extension)
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(    applyMiddleware(thunk)));
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 window.store = store;
 

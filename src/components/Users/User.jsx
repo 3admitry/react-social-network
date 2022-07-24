@@ -10,7 +10,7 @@ const User = React.memo(({user, followHandlerArrayOfUsers, follow, unFollow}) =>
             <div style={{width: '100px'}}>
                 <div>
                     <NavLink to={`/profile/${user.id}`}>
-                        <img className={s.ava}
+                        <img className={s.ava} alt=''
                              src={user.photos.small !== null ? user.photos.small : defaultUserPhoto}/>
                     </NavLink>
                 </div>

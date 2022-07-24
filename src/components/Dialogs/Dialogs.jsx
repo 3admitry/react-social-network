@@ -6,17 +6,15 @@ import {useForm} from "react-hook-form";
 
 export const Dialogs = (props) => {
 
-    const {register, handleSubmit, formState: {errors}, resetField} = useForm();
+    const {register, handleSubmit, formState: {errors}, reset} = useForm();
     let dialogItems = props.dialogsPage.dialogsItems.map((d, i) => {
         return <DialogItem key={i} name={d.name} id={d.id} avatar={d.avaUrl}/>
     })
     let messagesItems = props.dialogsPage.messages.map((m, i) => <Message key={i} message={m.message}/>)
 
-
-
     const onSubmit = (data) => {
         props.addNewMessage(data.message);
-        resetField('post');
+        reset();
     }
 
     return (
@@ -35,7 +33,6 @@ export const Dialogs = (props) => {
                         <input type="submit" value={'Send message'}/>
                     </div>
                 </form>
-
             </div>
         </div>
     );

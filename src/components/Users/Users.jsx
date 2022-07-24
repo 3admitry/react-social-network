@@ -19,10 +19,8 @@ const Users = React.memo(props => {
                     />
                 )}
             </div>
-
         </div>
     )
-
 });
 
 export default Users;

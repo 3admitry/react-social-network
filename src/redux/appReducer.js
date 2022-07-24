@@ -18,7 +18,7 @@ export const appReducer = (state = initialState, action) => {
     }
 }
 
-//AC
+//Actions creator
 export const setInitialize = () => ({type: INITIALIZE_SUCCESS});
 
 // Thunks

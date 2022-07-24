@@ -1,9 +1,0 @@
-.header {
-    grid-area: header;
-    background: #8fc2c7;
-    padding: 2rem;
-}
-.header img {
-    width: 50px;
-    filter: brightness(8);
-}

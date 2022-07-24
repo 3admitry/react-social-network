@@ -40,7 +40,6 @@ class UsersContainer extends React.Component {
                     : <Users {...this.props} paginationClickHandler={this.paginationClickHandler}/>}
             </>
         )
-
     }
 }
 
@@ -66,4 +65,3 @@ export default compose(
         getUsers: fetchUsers
     }),
 )(UsersContainer);
-//export default HocAccordion(UsersContainer);

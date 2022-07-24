@@ -1,24 +1,30 @@
 import React from "react";
-import c from "./Navbar.module.css"
-import {NavLink} from "react-router-dom";
+import style from "./Navbar.module.scss"
+import {Link, NavLink} from "react-router-dom";
+import {UserOutlined} from '@ant-design/icons';
+import {Button} from "antd";
 
 export const Navbar = () => {
     return (
-        <nav className={c.sidebar}>
+        <nav className={style.sidebar}>
             <div>
-                <NavLink className={navData => navData.isActive ? c.active : c.item} to="/profile">Profile</NavLink>
+                <Link className={navData => navData.isActive ? style.active : style.item} to="/profile">
+                    <Button type="link" block icon={<UserOutlined />}>
+                        Profile
+                    </Button>
+                    </Link>
             </div>
             <div>
-                <NavLink className={navData => navData.isActive ? c.active : c.item} to="/dialogs">Messages</NavLink>
+                <NavLink className={navData => navData.isActive ? style.active : style.item} to="/dialogs">Messages</NavLink>
             </div>
             <div>
-                <NavLink className={navData => navData.isActive ? c.active : c.item} to="/users">Users</NavLink>
+                <NavLink className={navData => navData.isActive ? style.active : style.item} to="/users">Users</NavLink>
             </div>
             <div>
-                <NavLink className={navData => navData.isActive ? c.active : c.item} to="/#">News</NavLink>
+                <NavLink className={navData => navData.isActive ? style.active : style.item} to="/news">News</NavLink>
             </div>
             <div>
-                <NavLink className={navData => navData.isActive ? c.active : c.item} to="/#">Music</NavLink>
+                <NavLink className={navData => navData.isActive ? style.active : style.item} to="/music">Music</NavLink>
             </div>
         </nav>
     )

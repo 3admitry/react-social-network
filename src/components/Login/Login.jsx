@@ -12,7 +12,7 @@ const Login = (props) => {
         props.loginTC(data.email, data.password, data.rememberMe, data.captcha)
     }
     const refreshCaptchaHandler = () => {
-      props.getCaptchaUrl();
+        props.getCaptchaUrl();
     }
 
     return (
@@ -21,15 +21,12 @@ const Login = (props) => {
             <h1>Login</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    {/* register your input into the hook by invoking the "register" function */}
                     <input type={'email'} placeholder={'Login'} {...register("email", {required: true})} />
                     {errors.email && <span>This field is required</span>}
                 </div>
 
                 <div>
-                    {/* include validation with required or other standard HTML validation rules */}
                     <input type={'password'} placeholder={'Password'} {...register("password", {required: true})} />
-                    {/* errors will return when field validation fails  */}
                     {errors.password && <span>This field is required</span>}
                 </div>
                 <div>
@@ -52,9 +49,9 @@ const Login = (props) => {
                     props.captchaUrl &&
                     <div>
                         <div>
-                        <img style={{width: '160px'}} src={props.captchaUrl} alt=""/>
+                            <img style={{width: '160px'}} src={props.captchaUrl} alt=""/>
                         </div>
-                        <div style={{cursor:'pointer'}} onClick={refreshCaptchaHandler}>
+                        <div style={{cursor: 'pointer'}} onClick={refreshCaptchaHandler}>
                             ⟳ Обнвоить
                         </div>
                     </div>

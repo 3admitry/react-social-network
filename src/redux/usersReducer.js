@@ -67,6 +67,7 @@ export const usersReducer = (state = initialState, action) => {
     }
 }
 
+// Actions creator
 export const followUser = (id) => ({type: FOLLOW, userID: id});
 export const unfollowUser = (id) => ({type: UNFOLLOW, userID: id});
 export const setUsers = (usersArr) => ({type: SET_USERS, users: usersArr});
@@ -76,6 +77,7 @@ export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages
 export const toogleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toogleIsFollowHandler = (isFetching, id) => ({type: TOGGLE_IS_FOLLOW_HANDLER, isFetching, id});
 
+// Thunks
 export const fetchUsers = (pageSize, currentPage) => async dispatch => {
     dispatch(toogleIsFetching(true));
     try {
@@ -88,7 +90,6 @@ export const fetchUsers = (pageSize, currentPage) => async dispatch => {
         dispatch(toogleIsFetching(false));
     }
 }
-
 const setUserFollowUnfollow = async (dispatch, userId, methodAPI, actionCreator) => {
     dispatch(toogleIsFollowHandler(true, userId));
     try {
@@ -102,7 +103,6 @@ const setUserFollowUnfollow = async (dispatch, userId, methodAPI, actionCreator)
         dispatch(toogleIsFollowHandler(false, userId));
     }
 }
-
 export const unFollow = (userId) => (dispatch) => {
     setUserFollowUnfollow(dispatch, userId, API.users.unfollowUser, unfollowUser)
 }

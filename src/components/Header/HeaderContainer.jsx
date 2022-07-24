@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {logoutTC} from "../../redux/authReducer";
 import {Header} from "./Header";
 
-class HeaderCointainer extends React.Component {
+class HeaderContainer extends React.Component {
     render() {
         return (
             <>
@@ -11,7 +11,6 @@ class HeaderCointainer extends React.Component {
             </>
         )
     }
-
 }
 
 let mapStateToProps = (state) => {
@@ -21,4 +20,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {logoutTC})(HeaderCointainer)
+export default connect(mapStateToProps, {logoutTC})(HeaderContainer)
