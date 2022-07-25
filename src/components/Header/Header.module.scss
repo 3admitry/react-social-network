@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   z-index: 10;
-  background-image: radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(83,138,214,1) 0%, rgba(134,231,214,1) 90% );
+  background-image: radial-gradient(circle farthest-corner at 92.3% 71.5%, rgba(83, 138, 214, 1) 0%, rgba(134, 231, 214, 1) 90%);
   padding: .8rem 0;
 
   .headerWrapper {
@@ -30,10 +30,23 @@
         text-transform: capitalize;
       }
     }
+
+    .login {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      &Details {
+        span {
+          margin-right: 10px;
+          color: white;
+        }
+      }
+    }
   }
 
   img {
-    width: 50px;
-    filter: brightness(8);
+    width: 35px;
+    border-radius: 50%;
   }
 }

@@ -3,9 +3,10 @@ import style from "./Header.module.scss"
 import {Link, NavLink} from "react-router-dom";
 import {Button} from "antd";
 import {LoginOutlined,LogoutOutlined} from '@ant-design/icons';
+import defaultUserPhoto from "../../../src/assets/images/user.jpg";
 
 export const Header = (props) => {
-    const logoutHandler = () => {
+  const logoutHandler = () => {
         props.logoutTC()
     }
     return (
@@ -22,8 +23,15 @@ export const Header = (props) => {
                 <div className={style.login}>
                     {props.isAuth
                         ? <>
-                            <span>{props.login}</span>
-                            <Button onClick={logoutHandler} size="large" ghost icon={<LogoutOutlined />}>Sing Out</Button>
+                            <div className={style.loginDetails}>
+                                <span>{props.login}</span>
+                                <img src={props.userProfile?.photos?.small || defaultUserPhoto} alt=""/>
+                            </div>
+                            <div>
+                                <Button onClick={logoutHandler} size="large" ghost icon={<LogoutOutlined />}>Sing Out</Button>
+                            </div>
+
+
                         </>
                         : <Link to="/login"><Button size="large" ghost icon={<LoginOutlined/>}>Sing In</Button></Link>
 
