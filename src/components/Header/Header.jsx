@@ -3,7 +3,7 @@ import style from "./Header.module.scss"
 import {Link, NavLink} from "react-router-dom";
 import {Button} from "antd";
 import {LoginOutlined,LogoutOutlined} from '@ant-design/icons';
-import defaultUserPhoto from "../../../src/assets/images/user.jpg";
+import defaultUserPhoto from "../../../src/assets/images/no-avatar.png";
 
 export const Header = (props) => {
   const logoutHandler = () => {
@@ -15,7 +15,7 @@ export const Header = (props) => {
                 <div>
                     <NavLink className={style.logoLink} to="/">
                         <div>
-                            <div className={style.logoLinkTitle}>incubatorBook</div>
+                            <div className={style.logoLinkTitle}>IncubatorBook</div>
                             <div className={style.logoLinkDesc}>social JS network</div>
                         </div>
                     </NavLink>

@@ -1,0 +1,38 @@
+.profile {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+
+    .mainProfile{
+
+        .profileBackground{
+            padding-right: 1rem;
+            height: 200px;
+            border-radius: 8px;
+            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(97,186,255,1) 0%, rgba(166,239,253,1) 90.1% );
+        }
+        .avatarStatus{
+            position: relative;
+            top: -100px;
+            left: 20px;
+
+            .avatar{
+                img {
+                    border-radius: 50%;
+                    width: 170px;
+                }
+            }
+            .status{
+
+            }
+        }
+    }
+    .infoProfile{
+        padding-left: 1.5rem;
+    }
+}
+

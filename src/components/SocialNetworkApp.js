@@ -14,6 +14,7 @@ import {withSuspense} from "../hoc/withSuspense";
 import News from "./News/News";
 import Music from "./Music/Music";
 import PageNotFound from "./PageNotFound/PageNotFound";
+import {Banner} from "./Banner/Banner";
 
 const ProfileContainer = React.lazy(() => import('./Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./Dialogs/DialogsContainer'));
@@ -35,6 +36,7 @@ class SocialNetworkApp extends Component {
         return (
             <div className={style.appWrapper}>
                 <HeaderContainer/>
+                <Banner/>
                 <div className={style.globalContent}>
                     <Navbar/>
                     <div className={style.mainContent}>
@@ -64,5 +66,9 @@ const mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initializeApp})
+    connect(mapStateToProps,
+        {
+            initializeApp
+        }
+    )
 )(SocialNetworkApp);

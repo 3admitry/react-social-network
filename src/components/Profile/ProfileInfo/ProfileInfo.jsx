@@ -1,9 +1,11 @@
 import React, {useState} from "react";
-import mod from "./ProfileInfo.module.css"
-import {Spin} from "antd";
+import style from "./ProfileInfo.module.scss"
+import {Divider, Spin} from "antd";
 import ProfileStatus from "./ProfileStatus"
 import defaultUserPhoto from "../../../assets/images/user.jpg";
 import {ProfileDataForm} from "./ProfileDataForm";
+import { Typography } from 'antd';
+const { Title } = Typography;
 
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, errorMessage}) => {
 
@@ -21,24 +23,32 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 
     return (
         <>
-            <div className={mod.banner}>
-                <img src="https://149611589.v2.pressablecdn.com/wp-content/uploads/2015/12/react.png" alt=""/>
-            </div>
-            <div>
-                <div>
-                    <img src={profile.photos.large || defaultUserPhoto} alt=""/>
-                    {isOwner && <input type={'file'} onChange={handlerAvatarChange}/>}
+            <div className={style.profile}>
+                <div className={style.mainProfile}>
+                    <div className={style.profileBackground}></div>
+                    <div className={style.avatarStatus}>
+                        <div className={style.avatar}>
+                            <img src={profile.photos.large || defaultUserPhoto} alt=""/>
+                            {isOwner && <input type={'file'} onChange={handlerAvatarChange}/>}
+                        </div>
+                        <div className={style.status}>
+                            <ProfileStatus status={status} updateStatus={updateStatus}/>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <ProfileStatus status={status} updateStatus={updateStatus}/>
+                <div className={style.infoProfile}>
+                    <Divider orientation="left" orientationMargin={0} >
+                        <Title level={3}>User information</Title>
+                    </Divider>
+
+                    {
+                        editMode
+                            ? <ProfileDataForm profile={profile} switchEditMode={switchEditMode}
+                                               submitProfileForm={submitProfileForm}
+                                               errorMessage={errorMessage}/>
+                            : <ProfileData profile={profile} isOwner={isOwner} switchEditMode={switchEditMode}/>
+                    }
                 </div>
-                {
-                    editMode
-                        ? <ProfileDataForm profile={profile} switchEditMode={switchEditMode}
-                                           submitProfileForm={submitProfileForm}
-                                           errorMessage={errorMessage}/>
-                        : <ProfileData profile={profile} isOwner={isOwner} switchEditMode={switchEditMode}/>
-                }
             </div>
         </>
     )
