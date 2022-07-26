@@ -5,6 +5,7 @@ import ProfileStatus from "./ProfileStatus"
 import defaultUserPhoto from "../../../assets/images/user.jpg";
 import {ProfileDataForm} from "./ProfileDataForm";
 import { Typography } from 'antd';
+import {CameraOutlined} from "@ant-design/icons";
 const { Title } = Typography;
 
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, errorMessage}) => {
@@ -29,7 +30,16 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                     <div className={style.avatarStatus}>
                         <div className={style.avatar}>
                             <img src={profile.photos.large || defaultUserPhoto} alt=""/>
-                            {isOwner && <input type={'file'} onChange={handlerAvatarChange}/>}
+                            {isOwner &&
+                                <>
+                                    <label htmlFor="upload-photo" className={style.labelAvatar}>
+                                        <CameraOutlined />
+                                        <input type="file" id='upload-photo' style={{display:'none'}} onChange={handlerAvatarChange}/>
+                                    </label>
+
+                                   {/* <input type={'file'} onChange={handlerAvatarChange}/>*/}
+                                </>
+                            }
                         </div>
                         <div className={style.status}>
                             <ProfileStatus status={status} updateStatus={updateStatus}/>
