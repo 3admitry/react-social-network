@@ -11,12 +11,12 @@ const SET_ERROR = 'social-network/profile/SET_ERROR';
 export let initialState = {
     newPostText: '',
     posts: [
-        {id: 1, message: 'Hello', likeCount: 5},
-        {id: 2, message: 'Hi there', likeCount: 6},
-        {id: 3, message: 'Nice to meet u', likeCount: 3},
-        {id: 4, message: 'mee too', likeCount: 23},
-        {id: 5, message: 'My first post', likeCount: 56},
-        {id: 6, message: 'Hello Wolrd', likeCount: 47},
+        {id: 1, comments: Math.ceil(Math.random()*100), stars: Math.ceil(Math.random()*100), message: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.', likeCount: 5},
+        {id: 2, comments: Math.ceil(Math.random()*100), stars: Math.ceil(Math.random()*100), message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nulla neque, pretium sed eros in, sagittis tempus mauris. Ut a risus ac tellus euismod mattis quis in diam. Aliquam in porta erat. Nunc arcu ligula, mollis sit amet eros ac, lobortis pulvinar magna. Morbi ut finibus nisi', likeCount: 6},
+        {id: 3, comments: Math.ceil(Math.random()*100), stars: Math.ceil(Math.random()*100), message: 'Donec vel ultrices nulla. Vivamus convallis eleifend nunc sit amet tempor. Maecenas nunc metus, faucibus sit amet dolor in, iaculis posuere nunc.', likeCount: 3},
+        {id: 4, comments: Math.ceil(Math.random()*100), stars: Math.ceil(Math.random()*100), message: 'Mauris a ornare lectus, at commodo est. Nulla id quam placerat, elementum nisi vel, cursus odio. Aenean eget sapien sed arcu interdum eleifend a ut justo. Nam sit amet odio in leo efficitur tempor vulputate et purus.', likeCount: 23},
+        {id: 5, comments: Math.ceil(Math.random()*100), stars: Math.ceil(Math.random()*100), message: 'Quisque posuere in quam et mollis. Aliquam laoreet egestas dignissim. Etiam vel vulputate felis. Suspendisse at sapien gravida.', likeCount: 56},
+        {id: 6, comments: Math.ceil(Math.random()*100), stars: Math.ceil(Math.random()*100), message: 'Curabitur ante libero, malesuada vitae varius sit amet, egestas a sapien. Phasellus non odio fermentum, suscipit est eget, efficitur orci. In nibh libero, pellentesque eget feugiat at, suscipit ac lacus. Mauris iaculis sit amet purus a pretium. Proin ullamcorper vulputate metus eget luctus.', likeCount: 47},
     ],
     userProfile: null,
     status: '',

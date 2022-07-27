@@ -1,33 +1,76 @@
 import React from "react";
-import {Post} from "./Post/Post";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
+import style from "./MyPosts.module.scss"
+import {Avatar, List, Space, Typography} from 'antd';
+import TextArea from "antd/es/input/TextArea";
+import avatar from './../../../assets/images/no-avatar.png'
+import {LikeOutlined, MessageOutlined, StarOutlined} from "@ant-design/icons";
+
+const {Title} = Typography;
+const IconText = ({ icon, text }) => (
+    <Space>
+        {React.createElement(icon)}
+        {text}
+    </Space>
+);
 
 export const MyPosts = (props) => {
-
-    const {register, handleSubmit, formState: {errors}, resetField} = useForm();
-    let postsElement = props.posts.map((p, i) => <Post key={i} message={p.message}
-                                                       likeCount={p.likeCount}/>)
+    const {control, handleSubmit, formState: {errors}, reset} = useForm();
+    // let postsElement = props.posts.map((p, i) => <Post key={i} message={p.message}
+    //                                                    likeCount={p.likeCount}/>)
 
     const onSubmit = (data) => {
         props.addNewPost(data.post);
-        resetField('post');
+        reset()
     }
 
     return (
-        <div style={{paddingLeft: '1rem'}}>
-            <h2>Mypost</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={style.myPost} >
+            <Title level={2}>My posts</Title>
+            <form id="post-form" onSubmit={handleSubmit(onSubmit)} className={style.form}>
                 <div>
-                    <textarea placeholder={'Type your post'} {...register("post", {required: true})} />
-                    {errors.post && <span>This field is required</span>}
+                    <Controller
+                        name="post"
+                        control={control}
+                        rules={{required: true}}
+                        render={({field}) => <>
+                            <label htmlFor="post">What's news ?</label>
+                            <div className={style.formItemContainer}>
+                                <TextArea className={style.formItemContainerTextArea} rows={4} placeholder="Type your post" maxLength={250} {...field}/>
+                                {errors.post && <div style={{color: 'red'}}>This field is required</div>}
+                            </div>
+                        </>
+                        }
+                    />
                 </div>
-                <div>
+                <div className={style.formSubmitButton} >
                     <input type="submit"/>
                 </div>
             </form>
-            <div>
-                {postsElement}
+            <div className={style.listOfPosts}>
+                <List
+                    itemLayout="vertical"
+                    size="large"
+                    dataSource={props.posts}
+                    renderItem={(item) => (
+                        <List.Item
+                            key={item.id}
+                            actions={[
+                                <IconText icon={StarOutlined} text={item.stars.toString()} key="list-vertical-star-o" />,
+                                <IconText icon={LikeOutlined} text={item.likeCount.toString()} key="list-vertical-like-o" />,
+                                <IconText icon={MessageOutlined} text={item.comments.toString()} key="list-vertical-message" />,
+                            ]}
+                        >
+                            <List.Item.Meta
+                                avatar={<Avatar src={avatar} />}
+                                title='Some name'
+                            />
+                            {item.message}
+                        </List.Item>
+                    )}
+                />
             </div>
         </div>
     )
 }
+

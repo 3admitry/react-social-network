@@ -1,9 +1,10 @@
 import React from "react";
-import {useFieldArray, useForm} from "react-hook-form";
-import style from "../../Login/Login.module.css";
+import {Controller, useForm} from "react-hook-form";
+import style from "./ProfileInfo.module.scss"
+import {Alert, Checkbox, Input} from "antd";
 
 export const ProfileDataForm = ({profile, submitProfileForm, errorMessage}) => {
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {control, register, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
             fullName: profile.fullName,
             aboutMe: profile.aboutMe,
@@ -12,47 +13,101 @@ export const ProfileDataForm = ({profile, submitProfileForm, errorMessage}) => {
             contacts: {...profile.contacts}
         }
     });
-    return <div>
+    return <div className={style.profileDataForm}>
+        {errorMessage &&
+            <Alert
+                message={errorMessage}
+                type="error"
+                closable
+                className={style.alert}
+            />
+        }
         <form id="profile-form" onSubmit={handleSubmit(submitProfileForm)}>
-            {errorMessage &&
-                <div style={{color: 'red'}}>
-                    {errorMessage}
-                </div>
-            }
-            <div>
-                <label htmlFor="fullName">Full name</label>
-                <input type={'text'} placeholder={'Full Name'} {...register("fullName", {required: true})} />
-                {errors.fullName && <span style={{color: 'red'}}>This field is required</span>}
+            <div className={style.formItem}>
+                <Controller
+                    name="fullName"
+                    control={control}
+                    rules={{required: true}}
+                    render={({field}) => <>
+                        <label htmlFor="fullName">Full name</label>
+                        <div className={style.formInput}>
+                            <Input status={errors.fullName && 'error'} type={'text'}
+                                   placeholder={'Full Name'} {...field} />
+                            {errors.fullName && <div style={{color: 'red'}}>This field is required</div>}
+                        </div>
+                    </>
+                    }
+                />
             </div>
-            <div>
-                <label htmlFor="aboutMe">About me</label>
-                <input type={'text'} placeholder={'About me'} {...register("aboutMe", {required: true})} />
-                {errors.aboutMe && <span style={{color: 'red'}}>This field is required</span>}
+            <div className={style.formItem}>
+                <Controller
+                    name="aboutMe"
+                    control={control}
+                    rules={{required: true}}
+                    render={({field}) => <>
+                        <label htmlFor="aboutMe">About me</label>
+                        <div className={style.formInput}>
+                            <Input status={errors.aboutMe && 'error'} type={'text'}
+                                   placeholder={'About me'} {...field} />
+                            {errors.aboutMe && <div style={{color: 'red'}}>This field is required</div>}
+                        </div>
+                    </>
+                    }
+                />
             </div>
-            <div>
-                <label htmlFor="lookingForAJob">Looking for a job</label>
-                <input type={'checkbox'} {...register("lookingForAJob", {required: true})} />
+            <div className={style.formItem}>
+                <Controller
+                    name="lookingForAJob"
+                    control={control}
+                    render={({field: { onChange, onBlur, value, name, ref }}) => <>
+                        <label htmlFor="lookingForAJob">Looking for a job</label>
+                        <div className={style.formInput}>
+                            <Checkbox checked={value} onChange={onChange} onBlur={onBlur} inputRef={ref} name={name}/>
+                        </div>
+                    </>
+                    }
+                />
             </div>
 
-            <div>
-                <label htmlFor="lookingForAJobDescription">Looking for a job description</label>
-                <input type={'text'}
-                       placeholder={'Looking for a job description'} {...register("lookingForAJobDescription", {required: true})} />
-                {errors.lookingForAJobDescription && <span style={{color: 'red'}}>This field is required</span>}
+            <div className={style.formItem}>
+                <Controller
+                    name="lookingForAJobDescription"
+                    control={control}
+                    rules={{required: true}}
+                    render={({field}) => <>
+                        <label htmlFor="lookingForAJobDescription">Looking for a job description</label>
+                        <div className={style.formInput}>
+                            <Input status={errors.lookingForAJobDescription && 'error'} type={'text'}
+                                   placeholder={'Looking for a job description'} {...field} />
+                            {errors.lookingForAJobDescription &&
+                                <div style={{color: 'red'}}>This field is required</div>}
+                        </div>
+                    </>
+                    }
+                />
             </div>
 
             <div>
                 {
                     Object.keys(profile.contacts).map((contact, index) => {
                         return (
-                            <div key={index}>
-                                <div><label htmlFor={`contacts[${contact}]`}>{contact}</label></div>
-                                <input type={'text'} placeholder={contact}
-                                       {...register(`contacts[${contact}]`, {required: true})}
+                            <div key={index} className={style.formItem}>
+                                <Controller
+                                    name={`contacts[${contact}]`}
+                                    control={control}
+                                    rules={{required: true}}
+                                    render={({field}) => <>
+                                        <label htmlFor={`contacts[${contact}]`}>{contact}</label>
+                                        <div className={style.formInput}>
+                                            <Input
+                                                status={errors[`contacts`] && errors[`contacts`][`${contact}`] && 'error'}
+                                                type={'text'} placeholder={contact} {...field} />
+                                            {errors[`contacts`] && errors[`contacts`][`${contact}`] &&
+                                                <div style={{color: 'red'}}>This field is required</div>}
+                                        </div>
+                                    </>
+                                    }
                                 />
-                                {errors[`contacts`] && errors[`contacts`][`${contact}`] &&
-                                    <span style={{color: 'red'}}>This field is required</span>}
-                                {/*{[${contact}]}*/}
                             </div>
                         )
                     })

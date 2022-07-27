@@ -86,7 +86,7 @@
             border-color: #d9d9d9;
             background: #fff;
 
-            &:hover{
+            &:hover {
               color: #40a9ff;
               border-color: #40a9ff;
             }
@@ -131,6 +131,29 @@
         .profileItemDesc {
 
         }
+      }
+    }
+
+    .profileDataForm {
+      .formItem {
+        display: flex;
+        margin-bottom: 7px;
+        align-items: start;
+
+        label {
+          width: 116px;
+          line-height: 13px;
+          padding-top: 6px;
+        }
+
+        .formInput {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      .alert{
+        margin-bottom: 10px;
       }
     }
   }
