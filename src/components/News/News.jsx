@@ -1,10 +1,9 @@
 import React from 'react';
+import {Empty} from 'antd';
 
 const News = () => {
     return (
-        <div>
-            Section under development. Try later
-        </div>
+        <Empty description={<span>News page under development. Try later</span>} />
     );
 };
 

@@ -13,10 +13,7 @@ export const ProfileDataForm = ({profile, submitProfileForm, errorMessage}) => {
         }
     });
     return <div>
-        <form onSubmit={handleSubmit(submitProfileForm)}>
-            <div>
-                <input type="submit" value={'Save'}/>
-            </div>
+        <form id="profile-form" onSubmit={handleSubmit(submitProfileForm)}>
             {errorMessage &&
                 <div style={{color: 'red'}}>
                     {errorMessage}

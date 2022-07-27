@@ -1,4 +1,6 @@
 import React from 'react';
+import style from "./ProfileInfo.module.scss"
+import {EditOutlined} from "@ant-design/icons";
 
 class ProfileStatus extends React.Component {
     state = {
@@ -7,7 +9,7 @@ class ProfileStatus extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.status !== this.props.status){
+        if (prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status
             })
@@ -36,17 +38,22 @@ class ProfileStatus extends React.Component {
     render() {
         return (
             <>
-                <div>My status: </div>
+                <div className={style.statusTitle}>My status:</div>
                 {!this.state.editMode &&
-                    <div>
-                        <span onClick={this.activateEditMode}>{this.state.status ? this.state.status:'Set your status'}</span>
+                    <div className={style.statusText}>
+                            <span
+                                onClick={this.props.isOwner ? this.activateEditMode : ''}>{this.state.status ? this.state.status : 'Set your status'}
+                            </span>
+                            <EditOutlined  onClick={this.props.isOwner ? this.activateEditMode : ''}/>
                     </div>
                 }
-                {this.state.editMode &&
+                {this.state.editMode && this.props.isOwner &&
                     <div>
-                        <input  onChange={(e)=>this.changeInputHandler(e.currentTarget.value)} onBlur={this.deActivateEditMode} type="text" value={this.state.status} autoFocus/>
+                        <input onChange={(e) => this.changeInputHandler(e.currentTarget.value)}
+                               onBlur={this.deActivateEditMode} type="text" value={this.state.status} autoFocus/>
                     </div>
                 }
+
             </>
         );
     }

@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import style from "./ProfileInfo.module.scss"
-import {Divider, Spin} from "antd";
+import {Badge, Button, Divider, Spin} from "antd";
 import ProfileStatus from "./ProfileStatus"
 import defaultUserPhoto from "../../../assets/images/user.jpg";
 import {ProfileDataForm} from "./ProfileDataForm";
-import { Typography } from 'antd';
-import {CameraOutlined} from "@ant-design/icons";
-const { Title } = Typography;
+import {Typography} from 'antd';
+import {CameraOutlined, EditOutlined} from "@ant-design/icons";
+
+const {Title} = Typography;
 
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, errorMessage}) => {
 
@@ -28,26 +29,42 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                 <div className={style.mainProfile}>
                     <div className={style.profileBackground}></div>
                     <div className={style.avatarStatus}>
-                        <div className={style.avatar}>
-                            <img src={profile.photos.large || defaultUserPhoto} alt=""/>
-                            {isOwner &&
-                                <>
-                                    <label htmlFor="upload-photo" className={style.labelAvatar}>
-                                        <CameraOutlined />
-                                        <input type="file" id='upload-photo' style={{display:'none'}} onChange={handlerAvatarChange}/>
-                                    </label>
-
-                                   {/* <input type={'file'} onChange={handlerAvatarChange}/>*/}
-                                </>
-                            }
+                        <div className={style.avatarContainer}>
+                            <div className={style.avatar}>
+                                <img src={profile.photos.large || defaultUserPhoto} alt=""/>
+                                {isOwner &&
+                                    <>
+                                        <label htmlFor="upload-photo" className={style.labelAvatar}>
+                                            <CameraOutlined/>
+                                            <input type="file" id='upload-photo' style={{display: 'none'}}
+                                                   onChange={handlerAvatarChange}/>
+                                        </label>
+                                    </>
+                                }
+                            </div>
+                            <div className={style.editButton}>
+                                {(isOwner && !editMode)
+                                    ? <div>
+                                        <Button onClick={switchEditMode} icon={<EditOutlined/>}>
+                                            Edit profile
+                                        </Button>
+                                    </div>
+                                    : <div>
+                                        <input className={style.submitButton} form="profile-form" type="submit" value={'Save'}/>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div className={style.fullName}>
+                            {profile.fullName}
                         </div>
                         <div className={style.status}>
-                            <ProfileStatus status={status} updateStatus={updateStatus}/>
+                            <ProfileStatus status={status} updateStatus={updateStatus} isOwner={isOwner}/>
                         </div>
                     </div>
                 </div>
                 <div className={style.infoProfile}>
-                    <Divider orientation="left" orientationMargin={0} >
+                    <Divider orientation="left" orientationMargin={0}>
                         <Title level={3}>User information</Title>
                     </Divider>
 
@@ -66,40 +83,36 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 
 const ProfileData = ({profile, isOwner, switchEditMode}) => {
     return (
-        <div>
-            {isOwner && <div>
-                <button onClick={switchEditMode}>Edit profile</button>
-            </div>}
-            <div>
-                <b>Full name:</b> {profile.fullName}
+        <div className={style.ProfileData}>
+            <div className={style.profileItem}>
+                <div className={style.profileItemTitle}>Full name</div>
+                <div className={style.profileItemDesc}>{profile.fullName}</div>
             </div>
-            <div>
-                <b>About me:</b> {(profile.aboutMe || '—')}
+            <div className={style.profileItem}>
+                <div className={style.profileItemTitle}>About me</div>
+                <div className={style.profileItemDesc}>{(profile.aboutMe || '—')}</div>
+            </div>
+            <div className={style.profileItem}>
+                <div className={style.profileItemTitle}>Looking for a job</div>
+                <div className={style.profileItemDesc}>{profile.lookingForAJob
+                    ? <Badge status="success"/>
+                    : <Badge status="error"/>}
+                </div>
+            </div>
+            <div className={style.profileItem}>
+                <div className={style.profileItemTitle}>Description</div>
+                <div className={style.profileItemDesc}>{profile.lookingForAJobDescription}</div>
             </div>
             {
-                profile.lookingForAJob &&
-                <div>
-                    <b>Looking for a job:</b> {profile.lookingForAJob}
-                </div>
+                Object.keys(profile.contacts).map((contact, index) => {
+                    return (
+                        <div key={index} className={style.profileItem}>
+                            <div className={style.profileItemTitle}>{contact}</div>
+                            <div className={style.profileItemDesc}>{(profile.contacts[contact] || '—')}</div>
+                        </div>
+                    )
+                })
             }
-            {
-                profile.lookingForAJobDescription &&
-                <div>
-                    <b>Description:</b> {profile.lookingForAJobDescription}
-                </div>
-            }
-            <div>
-                <b>Contacts</b>
-                {
-                    Object.keys(profile.contacts).map((contact, index) => {
-                        return (
-                            <div key={index}>
-                                <b>{contact}:</b> {(profile.contacts[contact] || '—')}
-                            </div>
-                        )
-                    })
-                }
-            </div>
         </div>
     );
 };

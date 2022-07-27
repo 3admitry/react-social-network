@@ -1,62 +1,138 @@
+@import '../../../common/_mixins.scss';
+
 .profile {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 50% 50%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  @include prettyBox;
 
-    background-color: white;
-    border-radius: 8px;
-    padding: 1rem 2rem;
+  .mainProfile {
 
-    .mainProfile{
+    .profileBackground {
+      padding-right: 1rem;
+      height: 200px;
+      border-radius: 8px;
+      background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(97, 186, 255, 1) 0%, rgba(166, 239, 253, 1) 90.1%);
+    }
 
-        .profileBackground{
-            padding-right: 1rem;
-            height: 200px;
-            border-radius: 8px;
-            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(97,186,255,1) 0%, rgba(166,239,253,1) 90.1% );
+    .avatarStatus {
+      position: relative;
+      top: -100px;
+
+      .avatarContainer {
+        display: flex;
+
+
+        .avatar {
+          padding-left: 20px;
+
+          img {
+            border-radius: 50%;
+            width: 170px;
+          }
+
+          .uploadAvatar {
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+          }
+
+          .labelAvatar {
+            background: #f1f1f1;
+            padding: 1rem;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50% 50%;
+            color: #63bbff;
+            font-size: 20px;
+            border: 2px solid white;
+            position: absolute;
+            top: 118px;
+            left: 142px;
+            cursor: pointer;
+          }
         }
-        .avatarStatus{
+
+        .editButton {
+          flex: 1 1;
+          align-self: end;
+          display: flex;
+          justify-content: end;
+
+          .submitButton {
+            line-height: 1.5715;
             position: relative;
-            top: -100px;
-            left: 20px;
+            display: inline-block;
+            font-weight: 400;
+            white-space: nowrap;
+            text-align: center;
+            background-image: none;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+            height: 32px;
+            padding: 4px 15px;
+            font-size: 14px;
+            border-radius: 2px;
+            color: rgba(0, 0, 0, 0.85);
+            border-color: #d9d9d9;
+            background: #fff;
 
-            .avatar{
-                img {
-                    border-radius: 50%;
-                    width: 170px;
-                }
-
-                .uploadAvatar {
-                    opacity: 0;
-                    position: absolute;
-                    z-index: -1;
-                }
-
-                .labelAvatar{
-                    background: #f1f1f1;
-                    padding: 1rem;
-                    height: 50px;
-                    width: 50px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 50% 50%;
-                    color: #63bbff;
-                    font-size: 20px;
-                    border: 2px solid white;
-                    position: absolute;
-                    top: 118px;
-                    left: 126px;
-                    cursor: pointer;
-                }
+            &:hover{
+              color: #40a9ff;
+              border-color: #40a9ff;
             }
-            .status{
-
-            }
+          }
         }
+      }
+
+      .status {
+        margin-top: .5rem;
+
+        .statusTitle {
+          color: #939393;
+        }
+
+        .statusText {
+          span {
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .fullName {
+        font-size: 25px;
+        font-weight: 600;
+      }
     }
-    .infoProfile{
-        padding-left: 1.5rem;
+  }
+
+  .infoProfile {
+    padding-left: 1.5rem;
+
+    .ProfileData {
+      .profileItem {
+        display: flex;
+        margin-bottom: 6px;
+
+        .profileItemTitle {
+          width: 130px;
+          color: #939393;
+        }
+
+        .profileItemDesc {
+
+        }
+      }
     }
+  }
 }
 

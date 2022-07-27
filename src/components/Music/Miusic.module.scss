@@ -1,0 +1,5 @@
+@import '../../common/_mixins.scss';
+
+.music {
+  @include prettyBox;
+}

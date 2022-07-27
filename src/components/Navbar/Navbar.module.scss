@@ -1,9 +1,10 @@
+@import '../../common/_mixins.scss';
+
 .sidebar {
-  padding: 1rem 2rem;
   width: 200px;
-  border-radius: 8px;
-  background-color: #fff;
   align-self: start;
+  @include prettyBox;
+
 
   .menu {
     .navLink {

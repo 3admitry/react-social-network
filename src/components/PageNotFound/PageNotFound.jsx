@@ -1,13 +1,17 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import {Button, Result} from "antd";
 
 const PageNotFound = () => {
     return (
-        <div>
-            <h1>Ooops! We can't find that page</h1>
-            <div><NavLink to="/">Back to homepage</NavLink></div>
-        </div>
-    );
+        <Result
+            status="404"
+            title="404"
+            subTitle="Sorry, the page you visited does not exist."
+            extra={<NavLink to="/"> <Button type="primary">Back Home</Button></NavLink>}
+        />
+    )
+        ;
 };
 
 export default PageNotFound;
