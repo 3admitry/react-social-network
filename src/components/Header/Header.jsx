@@ -2,11 +2,10 @@ import React from "react";
 import style from "./Header.module.scss"
 import {Link, NavLink} from "react-router-dom";
 import {Button} from "antd";
-import {LoginOutlined,LogoutOutlined} from '@ant-design/icons';
-import defaultUserPhoto from "../../../src/assets/images/no-avatar.png";
+import {LoginOutlined, LogoutOutlined} from '@ant-design/icons';
 
 export const Header = (props) => {
-  const logoutHandler = () => {
+    const logoutHandler = () => {
         props.logoutTC()
     }
     return (
@@ -27,13 +26,11 @@ export const Header = (props) => {
                                 <span>{props.login}</span>
                             </div>
                             <div>
-                                <Button onClick={logoutHandler} size="large" ghost icon={<LogoutOutlined />}>Sing Out</Button>
+                                <Button onClick={logoutHandler} size="large" ghost icon={<LogoutOutlined/>}>Sing
+                                    Out</Button>
                             </div>
-
-
                         </>
                         : <Link to="/login"><Button size="large" ghost icon={<LoginOutlined/>}>Sing In</Button></Link>
-
                     }
                 </div>
             </div>

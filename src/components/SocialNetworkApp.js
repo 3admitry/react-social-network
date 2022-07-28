@@ -36,7 +36,7 @@ class SocialNetworkApp extends Component {
         return (
             <div className={style.appWrapper}>
                 <HeaderContainer/>
-                <Banner/>
+                {this.props.isAuth && <Banner/>}
                 <div className={style.globalContent}>
                     {this.props.isAuth && <Navbar/>}
                     <div className={style.mainContent}>

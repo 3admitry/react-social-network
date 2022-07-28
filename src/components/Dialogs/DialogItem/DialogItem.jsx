@@ -1,7 +1,6 @@
 import React from 'react';
 import m from '../Dialogs.module.scss'
 import {NavLink} from "react-router-dom";
-import {Divider} from "antd";
 
 export const DialogItem = (props) => {
     let path = "/dialogs/" + props.id;

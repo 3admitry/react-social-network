@@ -4,7 +4,7 @@ import style from "./ProfileInfo.module.scss"
 import {Alert, Checkbox, Input} from "antd";
 
 export const ProfileDataForm = ({profile, submitProfileForm, errorMessage}) => {
-    const {control, register, handleSubmit, formState: {errors}} = useForm({
+    const {control, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
             fullName: profile.fullName,
             aboutMe: profile.aboutMe,
@@ -59,7 +59,7 @@ export const ProfileDataForm = ({profile, submitProfileForm, errorMessage}) => {
                 <Controller
                     name="lookingForAJob"
                     control={control}
-                    render={({field: { onChange, onBlur, value, name, ref }}) => <>
+                    render={({field: {onChange, onBlur, value, name, ref}}) => <>
                         <label htmlFor="lookingForAJob">Looking for a job</label>
                         <div className={style.formInput}>
                             <Checkbox checked={value} onChange={onChange} onBlur={onBlur} inputRef={ref} name={name}/>
@@ -114,6 +114,5 @@ export const ProfileDataForm = ({profile, submitProfileForm, errorMessage}) => {
                 }
             </div>
         </form>
-
     </div>
 }

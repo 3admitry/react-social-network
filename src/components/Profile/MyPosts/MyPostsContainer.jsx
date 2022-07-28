@@ -3,9 +3,9 @@ import {addPostAC} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 
-class MyPostsContainer extends React.Component{
+class MyPostsContainer extends React.Component {
 
-    render(){
+    render() {
         return <MyPosts {...this.props} />
     }
 }
@@ -26,5 +26,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-// const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPostsContainer)
 export default connect(mapStateToProps, mapDispatchToProps)(MyPostsContainer);

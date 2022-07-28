@@ -4,11 +4,11 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {Controller, useForm} from "react-hook-form";
 import TextArea from "antd/es/input/TextArea";
-import {Divider} from "antd";
+import {Button} from "antd";
 
 export const Dialogs = (props) => {
 
-    const {register, handleSubmit, formState: {errors}, reset, control} = useForm();
+    const {handleSubmit, formState: {errors}, reset, control} = useForm();
     let dialogItems = props.dialogsPage.dialogsItems.map((d, i) => {
         return <DialogItem key={i} name={d.name} id={d.id} avatar={d.avaUrl}/>
     })
@@ -34,7 +34,8 @@ export const Dialogs = (props) => {
                             rules={{required: true}}
                             render={({field}) => <>
                                 <div className={style.formItemContainer}>
-                                    <TextArea className={style.formItemContainerTextArea} rows={4} placeholder="Type your message" maxLength={250} {...field}/>
+                                    <TextArea className={style.formItemContainerTextArea} rows={4}
+                                              placeholder="Type your message" maxLength={250} {...field}/>
                                     {errors.message && <div style={{color: 'red'}}>This field is required</div>}
                                 </div>
                             </>
@@ -42,7 +43,9 @@ export const Dialogs = (props) => {
                         />
                     </div>
                     <div className={style.formSubmitButton}>
-                        <input type="submit" value={'Send message'} />
+                        <Button type="primary" htmlType="submit">
+                            Send message
+                        </Button>
                     </div>
                 </form>
             </div>

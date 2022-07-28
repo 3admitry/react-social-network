@@ -1,14 +1,12 @@
 .banner {
-  background-image: linear-gradient( 135deg, #FFA8A8 10%, #FCFF00 100%);
+  background-image: linear-gradient(135deg, #FFA8A8 10%, #FCFF00 100%);
   border-radius: 10px;
   padding: 60px 50px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 30px;
   z-index: 1;
   max-width: 1024px;
-  margin: 0 auto;
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0 auto;
 
   .media {
     align-items: center;
@@ -25,6 +23,7 @@
         font-weight: 700;
         margin-bottom: 0;
       }
+
       .itemTitleH5 {
         font-size: 20px;
         color: #fff;
@@ -43,6 +42,7 @@
       right: 9px;
       position: absolute;
     }
+
     & li:nth-child(2n) {
       top: auto;
       bottom: 0;

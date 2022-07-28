@@ -1,18 +1,46 @@
-@import '../../common/_mixins.scss';
+@import '../../assets/scss/mixins';
 
-.login{
-    @include prettyBox;
-    width: 400px;
+.login {
+  @include prettyBox;
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 6rem 4rem;
+  flex-direction: column;
+  align-items: center;
+
+  &Desctiption {
+    text-align: center;
+    color: #838383;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &Form {
     display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 6rem;
     flex-direction: column;
+    gap: 2px;
     align-items: center;
-}
+    margin-top: 1rem;
 
-.serverError {
-    color: red;
-    border: 1px solid red;
-    padding: 5px;
+    &Item {
+      margin-bottom: .5rem;
+
+      &Input {
+        &Captcha {
+          img {
+            width: 160px;
+          }
+        }
+
+        &RefreshCaptcha {
+          cursor: pointer;
+          text-align: center;
+        }
+      }
+    }
+  }
 }

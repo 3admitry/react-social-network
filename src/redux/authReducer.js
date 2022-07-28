@@ -36,7 +36,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 //Actions creator
-export const setAuthData = (payload, isAuth) => ({type: SET_AUTH_DATA, payload: {...payload, isAuth}});
+export const setAuthData = (payload) => ({type: SET_AUTH_DATA, payload: {...payload}});
 export const setCaptchaUrl = (captchaUrl) => ({type: SET_CAPTCHA_URL, payload: {captchaUrl}});
 export const setError = (errorMessage) => ({type: SET_ERROR, errorMessage});
 
@@ -45,7 +45,7 @@ export const getAuth = () => dispatch => {
     return API.auth.getAuth()
         .then((response) => {
             if (response.resultCode === 0) {
-                dispatch(setAuthData(response.data, true));
+                dispatch(setAuthData({...response.data, isAuth: true}));
             }
         })
 }
@@ -53,7 +53,7 @@ export const loginTC = (email, password, rememberMe, captcha=null) => async disp
     try {
         const response = await API.auth.login(email, password, rememberMe, captcha)
         if (response.data.resultCode === 0) {
-            dispatch(setAuthData({email, password, rememberMe, captcha}, true));
+            dispatch(setAuthData({email, password, rememberMe, captcha, isAuth: true, id: response.data.data.userId}));
             dispatch(getAuth());
             dispatch(setError(null))
             dispatch(setCaptchaUrl(null))
@@ -76,7 +76,7 @@ export const logoutTC = () => async dispatch => {
     try {
         const response = await API.auth.logout()
         if (response.data.resultCode === 0) {
-            dispatch(setAuthData({email: null, password: null, rememberMe: null}, false));
+            dispatch(setAuthData({email: null, password: null, rememberMe: null, isAuth: false, id: null, login: null}));
         }
     } catch (e) {
         console.error(e.message)

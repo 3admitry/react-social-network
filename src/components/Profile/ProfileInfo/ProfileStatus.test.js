@@ -11,21 +11,21 @@ describe("Profile status", () => {
     test("After creation 'span' should be displayed", async () => {
         const component = create(<ProfileStatus status='TEST STATUS' />);
         const instance = component.root;
-        const span = await instance.findByType("span");
+        const span = await instance.findByType("mark");
         expect(span).not.toBeNull()
     });
     test("After creation 'input' shouldn't be displayed", async () => {
         const component = create(<ProfileStatus status='TEST STATUS' />);
         const instance = component.root;
         expect( ()=>{
-            // eslint-disable-next-line testing-library/await-async-query
+            // eslint-disable-next-line testing-library/await-async-query,no-unused-vars
             const input = instance.findByType("input");
         }).toThrow('')
     });
     test("After click input should be displayed instead of span", async () => {
-        const component = create(<ProfileStatus status='TEST STATUS' />);
+        const component = create(<ProfileStatus status='TEST STATUS' isOwner={true} />);
         const instance = component.root;
-        const span = await instance.findByType("span");
+        const span = await instance.findByType("mark");
         span.props.onClick()
         const input = await instance.findByType("input");
         expect(input.props.value).toBe('TEST STATUS')

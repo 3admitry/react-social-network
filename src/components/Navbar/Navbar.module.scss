@@ -1,10 +1,9 @@
-@import '../../common/_mixins.scss';
+@import '../../assets/scss/mixins';
 
 .sidebar {
   width: 200px;
   align-self: start;
   @include prettyBox;
-
 
   .menu {
     .navLink {

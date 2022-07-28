@@ -50,7 +50,8 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                                         </Button>
                                     </div>
                                     : <div>
-                                        <input className={style.submitButton} form="profile-form" type="submit" value={'Save'}/>
+                                        <input className={style.submitButton} form="profile-form" type="submit"
+                                               value={'Save'}/>
                                     </div>
                                 }
                             </div>
@@ -81,7 +82,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
     )
 }
 
-const ProfileData = ({profile, isOwner, switchEditMode}) => {
+const ProfileData = ({profile}) => {
     return (
         <div className={style.ProfileData}>
             <div className={style.profileItem}>

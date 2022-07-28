@@ -8,13 +8,15 @@ export const Navbar = () => {
         <aside className={style.sidebar}>
             <nav className={style.menu}>
                 <div>
-                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")} to="/profile">
+                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")}
+                             to="/profile">
                         <UserOutlined/>
                         Profile
                     </NavLink>
                 </div>
                 <div>
-                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")} to="/users">
+                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")}
+                             to="/users">
                         <TeamOutlined/>
                         Users
                     </NavLink>
@@ -27,13 +29,15 @@ export const Navbar = () => {
                     </NavLink>
                 </div>
                 <div>
-                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")} to="/news">
+                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")}
+                             to="/news">
                         <AlignLeftOutlined/>
                         News
                     </NavLink>
                 </div>
                 <div>
-                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")} to="/music">
+                    <NavLink className={({isActive}) => style.navLink + (isActive ? ` ${style.active}` : "")}
+                             to="/music">
                         <SoundOutlined/>
                         Music
                     </NavLink>

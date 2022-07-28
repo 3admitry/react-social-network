@@ -15,20 +15,17 @@ class ProfileStatus extends React.Component {
             })
         }
     }
-
     activateEditMode = () => {
         this.setState({
             editMode: true
         })
     }
-
     deActivateEditMode = () => {
         this.setState({
             editMode: false
         })
         this.props.updateStatus(this.state.status);
     }
-
     changeInputHandler = (newStatus) => {
         this.setState({
             status: newStatus
@@ -41,13 +38,14 @@ class ProfileStatus extends React.Component {
                 <div className={style.statusTitle}>My status:</div>
                 {!this.state.editMode &&
                     <div className={style.statusText}>
-                            <span
-                                onClick={this.props.isOwner ? this.activateEditMode : (()=>{})}>{this.state.status ? this.state.status : 'Set your status'}
-                            </span>
+                            <mark
+                                onClick={this.props.isOwner ? this.activateEditMode : (() => {
+                                })}>{this.state.status ? this.state.status : 'Set your status'}
+                            </mark>
                         {this.props.isOwner &&
-                            <EditOutlined  onClick={this.props.isOwner ? this.activateEditMode : (()=>{})}/>
+                            <EditOutlined onClick={this.props.isOwner ? this.activateEditMode : (() => {
+                            })}/>
                         }
-
                     </div>
                 }
                 {this.state.editMode && this.props.isOwner &&
@@ -56,7 +54,6 @@ class ProfileStatus extends React.Component {
                                onBlur={this.deActivateEditMode} type="text" value={this.state.status} autoFocus/>
                     </div>
                 }
-
             </>
         );
     }
