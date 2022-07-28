@@ -1,0 +1,101 @@
+@import '../../common/_mixins.scss';
+
+.dialogs {
+  @include prettyBox;
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+
+  .dialog {
+
+    .dialogBox {
+      padding: .5rem;
+
+      &:hover {
+        background: #ececec;
+      }
+
+      .dialogLink {
+        display: flex;
+        align-items: center;
+      }
+
+      .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: .3rem;
+      }
+    }
+  }
+
+  .messages {
+
+    .message {
+      div {
+        padding: .5rem;
+        border-radius: 10px;
+        background: #f3f3f3;
+      }
+
+      &:nth-child(even) {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      &:nth-child(odd) {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  .form {
+    margin-top: 2rem;
+
+    &Item {
+      &Container {
+        margin-top: .5rem;
+
+        &TextArea {
+          background-color: #f7f7f7;
+        }
+      }
+    }
+
+    &SubmitButton {
+      text-align: right;
+
+      input {
+        line-height: 1.5715;
+        position: relative;
+        display: inline-block;
+        font-weight: 400;
+        white-space: nowrap;
+        text-align: center;
+        cursor: pointer;
+        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        touch-action: manipulation;
+        height: 32px;
+        padding: 4px 15px;
+        font-size: 14px;
+        border-radius: 2px;
+        color: #fff;
+        border-color: #1890ff;
+        background: #1890ff;
+        text-shadow: 0 -1px 0 #0000001f;
+        box-shadow: 0 2px #0000000b;
+        margin-top: 18px;
+      }
+    }
+  }
+
+
+}
+
+

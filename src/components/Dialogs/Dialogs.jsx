@@ -1,12 +1,14 @@
 import React from 'react';
-import m from './Dialogs.module.css'
+import style from './Dialogs.module.scss'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
+import TextArea from "antd/es/input/TextArea";
+import {Divider} from "antd";
 
 export const Dialogs = (props) => {
 
-    const {register, handleSubmit, formState: {errors}, reset} = useForm();
+    const {register, handleSubmit, formState: {errors}, reset, control} = useForm();
     let dialogItems = props.dialogsPage.dialogsItems.map((d, i) => {
         return <DialogItem key={i} name={d.name} id={d.id} avatar={d.avaUrl}/>
     })
@@ -18,19 +20,29 @@ export const Dialogs = (props) => {
     }
 
     return (
-        <div className={m.dialogs}>
-            <div className={m.dialog}>
+        <div className={style.dialogs}>
+            <div className={style.dialog}>
                 {dialogItems}
             </div>
-            <div className={m.messages}>
+            <div className={style.messages}>
                 {messagesItems}
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
                     <div>
-                        <textarea placeholder={'Type your message'} {...register("message", {required: true})} />
-                        {errors.post && <span>This field is required</span>}
+                        <Controller
+                            name="message"
+                            control={control}
+                            rules={{required: true}}
+                            render={({field}) => <>
+                                <div className={style.formItemContainer}>
+                                    <TextArea className={style.formItemContainerTextArea} rows={4} placeholder="Type your message" maxLength={250} {...field}/>
+                                    {errors.message && <div style={{color: 'red'}}>This field is required</div>}
+                                </div>
+                            </>
+                            }
+                        />
                     </div>
-                    <div>
-                        <input type="submit" value={'Send message'}/>
+                    <div className={style.formSubmitButton}>
+                        <input type="submit" value={'Send message'} />
                     </div>
                 </form>
             </div>

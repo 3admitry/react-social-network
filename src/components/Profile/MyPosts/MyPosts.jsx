@@ -15,9 +15,8 @@ const IconText = ({ icon, text }) => (
 );
 
 export const MyPosts = (props) => {
+
     const {control, handleSubmit, formState: {errors}, reset} = useForm();
-    // let postsElement = props.posts.map((p, i) => <Post key={i} message={p.message}
-    //                                                    likeCount={p.likeCount}/>)
 
     const onSubmit = (data) => {
         props.addNewPost(data.post);
@@ -63,7 +62,7 @@ export const MyPosts = (props) => {
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={avatar} />}
-                                title='Some name'
+                                title={props.profile?.fullName}
                             />
                             {item.message}
                         </List.Item>

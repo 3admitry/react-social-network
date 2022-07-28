@@ -1,0 +1,8 @@
+@import '../../common/_mixins.scss';
+
+.users{
+    @include prettyBox;
+    &List{
+        margin-top: 1rem;
+    }
+}

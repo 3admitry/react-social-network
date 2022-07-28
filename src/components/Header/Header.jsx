@@ -25,7 +25,6 @@ export const Header = (props) => {
                         ? <>
                             <div className={style.loginDetails}>
                                 <span>{props.login}</span>
-                                <img src={props.userProfile?.photos?.small || defaultUserPhoto} alt=""/>
                             </div>
                             <div>
                                 <Button onClick={logoutHandler} size="large" ghost icon={<LogoutOutlined />}>Sing Out</Button>

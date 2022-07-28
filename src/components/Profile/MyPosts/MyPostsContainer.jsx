@@ -1,12 +1,20 @@
+import React from "react";
 import {addPostAC} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
+
+class MyPostsContainer extends React.Component{
+
+    render(){
+        return <MyPosts {...this.props} />
+    }
+}
 
 let mapStateToProps = (state) => {
     return {
         newPostText: state.profilePage.newPostText,
         posts: state.profilePage.posts,
-        profile: state.profilePage.userProfile
+        auth: state.auth
     }
 };
 
@@ -18,5 +26,5 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
-export default MyPostsContainer;
+// const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPostsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(MyPostsContainer);

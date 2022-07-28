@@ -26,7 +26,7 @@ class SocialNetworkApp extends Component {
 
     render() {
         if (!this.props.initialize) {
-            return <Spin size="large"/>
+            return <div className={style.initialize}><Spin size="large"/></div>
         }
 
         // the way to use JSX to render component for prop. element of Route
@@ -38,7 +38,7 @@ class SocialNetworkApp extends Component {
                 <HeaderContainer/>
                 <Banner/>
                 <div className={style.globalContent}>
-                    <Navbar/>
+                    {this.props.isAuth && <Navbar/>}
                     <div className={style.mainContent}>
                         <Routes>
                             <Route key='0' path='/' element={<Navigate to='/profile'/>}/>
@@ -60,7 +60,8 @@ class SocialNetworkApp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        initialize: state.app.initialize
+        initialize: state.app.initialize,
+        isAuth: state.auth.isAuth
     }
 }
 

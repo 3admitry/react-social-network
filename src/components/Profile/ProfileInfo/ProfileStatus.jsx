@@ -42,9 +42,12 @@ class ProfileStatus extends React.Component {
                 {!this.state.editMode &&
                     <div className={style.statusText}>
                             <span
-                                onClick={this.props.isOwner ? this.activateEditMode : ''}>{this.state.status ? this.state.status : 'Set your status'}
+                                onClick={this.props.isOwner ? this.activateEditMode : (()=>{})}>{this.state.status ? this.state.status : 'Set your status'}
                             </span>
-                            <EditOutlined  onClick={this.props.isOwner ? this.activateEditMode : ''}/>
+                        {this.props.isOwner &&
+                            <EditOutlined  onClick={this.props.isOwner ? this.activateEditMode : (()=>{})}/>
+                        }
+
                     </div>
                 }
                 {this.state.editMode && this.props.isOwner &&

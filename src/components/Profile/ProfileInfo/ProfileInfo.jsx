@@ -13,7 +13,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 
     let [editMode, setEditMode] = useState(false)
 
-    if (!profile) return <Spin/>
+    if (!profile) return <div className={style.initialize}><Spin size="large"/></div>
 
     const handlerAvatarChange = (e) => savePhoto(e.target.files[0])
     const switchEditMode = () => setEditMode(!editMode)

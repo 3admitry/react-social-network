@@ -3,20 +3,22 @@ import {useForm} from "react-hook-form";
 import {getCaptchaUrl, loginTC} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
-import style from "./Login.module.css"
+import style from "./Login.module.scss"
+import {Button} from "antd";
+
 
 const Login = (props) => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit = (data) => {
         console.log(data)
-        props.loginTC(data.email, data.password, data.rememberMe, data.captcha)
+        //props.loginTC(data.email, data.password, data.rememberMe, data.captcha)
     }
     const refreshCaptchaHandler = () => {
         props.getCaptchaUrl();
     }
 
     return (
-        <div>
+        <div className={style.login}>
             {props.isAuth && <Navigate to='/profile'/>}
             <h1>Login</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -57,10 +59,16 @@ const Login = (props) => {
                     </div>
                 }
                 <div>
-                    <input type="submit"/>
+                    {/*<input type="submit"/>*/}
+                    <Button type="primary" htmlType="submit">
+                        Submit
+                    </Button>
                 </div>
             </form>
         </div>
+
+
+
     );
 };
 const mapStateToProps = (state) => ({

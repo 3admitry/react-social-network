@@ -8,8 +8,9 @@ export function Banner() {
         <div className={style.banner}>
             <div className={style.media}>
                 <div className={style.mediaBody}>
-                    <h3 className={style.itemTitile}>Welcome to the family</h3>
-                    <p>Check what your friends have been up to!</p>
+                    <h3 className={style.itemTitleH3}>Welcome to the family</h3>
+                    <h5 className={style.itemTitleH5}>It's my pet-project from it-incubator</h5>
+                    <p>We have over 20 000 active users. Enjoy it!</p>
                 </div>
             </div>
             <ul className={style.mediaImg}>

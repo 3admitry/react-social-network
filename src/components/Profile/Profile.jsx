@@ -15,7 +15,7 @@ const Profile = ({userProfile, profileStatus, updateProfileStatus, isOwner, save
                 saveProfile={saveProfile}
                 errorMessage={errorMessage}
             />
-            <MyPostsContainer/>
+            <MyPostsContainer profile={userProfile}/>
         </div>
     );
 };

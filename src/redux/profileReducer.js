@@ -28,7 +28,7 @@ export const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             return {
                 ...state,
-                posts: [...state.posts, {id: 7, message: action.newText, likeCount: 0}],
+                posts: [...state.posts, {id:  Math.ceil(Math.random()*100),  comments: Math.ceil(Math.random()*100), stars: Math.ceil(Math.random()*100), message: action.newText, likeCount:  Math.ceil(Math.random()*100),}],
                 newPostText: ''
             };
         case SET_USER_PROFILE:
