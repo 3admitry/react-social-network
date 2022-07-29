@@ -31,7 +31,7 @@ const Login = (props) => {
                     </a>
                 </p>
                 <p>or use common test account credentials:</p>
-                <p>Email: free@samuraijs.com | Password: free</p>
+                <p>Email: web.refaq@gmail.com | Password: password</p>
                 <p>or just click <Button onClick={fillForm} type={'link'}>fill form</Button></p>
             </div>
             {props.errorMessage &&

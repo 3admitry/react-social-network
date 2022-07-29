@@ -1,6 +1,25 @@
-# Getting Started with Create React SocialNetworkApp
+# React Social Network - IncubatorBook
 
-This project was bootstrapped with [Create React SocialNetworkApp](https://github.com/facebook/create-react-app).
+This is my pet-project (SPA) that developed with class and function components using [Ant.Design UI](https://ant.design/)
+
+A tiny social network that demonstrates the main features of the React application paired with Redux state management
+You can sign in (using validation and captcha), make changes to your profile information, status, add posts. You can view the users page, now there are over 20,000 active users in the database, subscribe or unsubscribe to any of them. And also visit the dialog page where the pseudo-chat is located. The News and Music pages are frozen
+
+## Demo
+Demo Link: [https://3admitry.github.io/react-social-network](https://3admitry.github.io/react-social-network)
+
+Demo access:
+    `Login: web.refaq@gmail.com`
+    `Password: password`
+
+## Build with
+React.js
+Redux
+React-redux
+Redux-form
+Unit testing
+JavaScript
+
 
 ## Available Scripts
 
@@ -28,43 +47,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React SocialNetworkApp documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web SocialNetworkApp
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
