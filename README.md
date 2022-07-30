@@ -2,24 +2,25 @@
 
 This is my pet-project (SPA) that developed with class and function components using [Ant.Design UI](https://ant.design/)
 
-A tiny social network that demonstrates the main features of the React application paired with Redux state management
+A tiny social network that demonstrates the main features of the React application paired with Redux state management\
 You can sign in (using validation and captcha), make changes to your profile information, status, add posts. You can view the users page, now there are over 20,000 active users in the database, subscribe or unsubscribe to any of them. And also visit the dialog page where the pseudo-chat is located. The News and Music pages are frozen
 
 ## Demo
-Demo Link: [https://3admitry.github.io/react-social-network](https://3admitry.github.io/react-social-network)
+Project Demo Link: [https://3admitry.github.io/react-social-network](https://3admitry.github.io/react-social-network)
 
-Demo access:
-    `Login: web.refaq@gmail.com`
-    `Password: password`
+### Demo access:
+Login: `web.refaq@gmail.com` \
+Password: `password`
 
 ## Build with
-React.js
-Redux
-React-redux
-Redux-form
-Unit testing
-JavaScript
-
+React.js\
+Redux, Redux-thunk, React-redux\
+React-hook-form\
+React-router-dom\
+React-test-renderer\
+Unit testing\
+JavaScript\
+UI - Ant Design
 
 ## Available Scripts
 
