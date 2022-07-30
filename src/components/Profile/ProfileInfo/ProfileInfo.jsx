@@ -43,7 +43,8 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                                 }
                             </div>
                             <div className={style.editButton}>
-                                {(isOwner && !editMode)
+                                {isOwner ?
+                                    (!editMode
                                     ? <div>
                                         <Button onClick={switchEditMode} icon={<EditOutlined/>}>
                                             Edit profile
@@ -53,6 +54,8 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                                         <input className={style.submitButton} form="profile-form" type="submit"
                                                value={'Save'}/>
                                     </div>
+                                    )
+                                    :''
                                 }
                             </div>
                         </div>
