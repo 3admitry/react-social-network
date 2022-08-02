@@ -20,7 +20,8 @@ React-router-dom\
 React-test-renderer\
 Unit testing\
 JavaScript\
-UI - Ant Design
+UI - Ant Design\
+SASS
 
 ## Available Scripts
 
