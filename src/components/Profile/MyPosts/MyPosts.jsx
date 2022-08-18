@@ -69,7 +69,8 @@ export const MyPosts = (props) => {
                                 avatar={<Avatar src={avatar}/>}
                                 title={props.profile?.fullName}
                             />
-                            {item.message}
+                            <div className={style.postMessage}>{item.message}</div>
+
                         </List.Item>
                     )}
                 />

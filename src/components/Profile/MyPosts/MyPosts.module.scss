@@ -22,6 +22,8 @@
   }
 
   .listOfPosts {
-
+      .postMessage{
+        word-break: break-word;
+      }
   }
 }
